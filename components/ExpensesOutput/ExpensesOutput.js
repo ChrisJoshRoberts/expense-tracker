@@ -6,31 +6,36 @@ import ExpensesList from './ExpensesList'
 const dummyExpenses = [
   {
     id: '1',
-    description: 'Groceries',
+    title: 'Groceries',
+    description: 'buying daily groceries',
     amount: 94.12,
     date: new Date(2021, 6, 14),
   },
   {
     id: '2',
-    description: 'Rent',
+    title: 'Rent',
+    description: 'monthly rent',
     amount: 800.0,
     date: new Date(2021, 6, 1),
   },
   {
     id: '3',
-    description: 'Insurance',
+    tite: 'Insurance',
+    description: 'monthly insurance',
     amount: 294.67,
     date: new Date(2021, 5, 20),
   },
   {
     id: '4',
-    description: 'Internet',
+    tile: 'Internet',
+    description: 'monthly internet',
     amount: 45.0,
     date: new Date(2021, 6, 16),
   },
   {
     id: '5',
-    description: 'Electricity',
+    title: 'Electricity',
+    description: 'Monthly Electricity',
     amount: 98.0,
     date: new Date(2021, 6, 10),
   }

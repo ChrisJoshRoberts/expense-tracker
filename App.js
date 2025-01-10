@@ -44,7 +44,9 @@ export default function App() {
   return (
     <>
     <StatusBar style="auto" />
-    <NavigationContainer style={styles.container}>
+    <NavigationContainer style={styles.container} screenOptions={{
+      backgroundColor: 'red'
+    }}>
       <Stack.Navigator>
         <Stack.Screen name="ExpensesOverview" component={ExpensesOverview} options={{
           headerShown: false
