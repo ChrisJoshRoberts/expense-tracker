@@ -5,16 +5,23 @@ import { colors } from '../../constants/Colors'
 
 
 function renderExpenseItem(itemData) {
+  const formattedDate = itemData.item.date.toISOString().split('T')[0]
+
   return (
     <View style={styles.listItem}>
-      <View style={styles.iconStyle}>
-        <Banknote size={40} color={colors.blue}/>
+      <View style={styles.innerWrapper}>
+        <View style={styles.iconStyle}>
+          <Banknote size={40} color={colors.blue}/>
+        </View>
+        <View>
+          <Text style={styles.expenseTitle}>{itemData.item.title}</Text>
+          <Text style={styles.exDesctiotion}>{itemData.item.description}</Text>
+        </View>
       </View>
-      <View>
-        <Text>{itemData.item.title}</Text>
-        <Text>{itemData.item.description}</Text>
+      <View style={{alignItems: 'flex-end', gap: 5}}>
+        <Text style={{fontWeight: 700, color: colors.error}}>-R{itemData.item.amount.toFixed(2)}</Text>
+        <Text style={{color: colors.darkGrey}}>{formattedDate}</Text>
       </View>
-      <Text>R{itemData.item.amount.toFixed(2)}</Text>
     </View>
   )
 }
@@ -42,13 +49,27 @@ const styles = StyleSheet.create({
   listWrapper: {
     width: '100%',
   },
+  innerWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10
+  },
   listItem: {
     flexDirection: 'row',
     width: '95%',
     justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 10,
-    backgroundColor: colors.lightGrey,
+    backgroundColor: colors.offWhite,
     marginVertical: 5,
     borderRadius: 8
+  },
+  expenseTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  exDesctiotion: {
+    fontSize: 14,
+    color: colors.darkGrey
   }
 })

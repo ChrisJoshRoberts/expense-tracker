@@ -20,14 +20,14 @@ const dummyExpenses = [
   },
   {
     id: '3',
-    tite: 'Insurance',
+    title: 'Insurance',
     description: 'monthly insurance',
     amount: 294.67,
     date: new Date(2021, 5, 20),
   },
   {
     id: '4',
-    tile: 'Internet',
+    title: 'Internet',
     description: 'monthly internet',
     amount: 45.0,
     date: new Date(2021, 6, 16),

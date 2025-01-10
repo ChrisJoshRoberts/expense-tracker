@@ -4,7 +4,7 @@ import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput'
 
 const RecentExpenses = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ExpensesOutput expensesPeriod={'Last 7 Days'} />
     </SafeAreaView>
   )
@@ -12,4 +12,9 @@ const RecentExpenses = () => {
 
 export default RecentExpenses
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  }
+})

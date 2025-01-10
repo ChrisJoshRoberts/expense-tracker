@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import AllExpenses from './screens/AllExpenses';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ManageExpense from './screens/ManageExpense';
 import RecentExpenses from './screens/RecentExpenses';
 import { colors } from './constants/Colors';
@@ -44,23 +44,21 @@ export default function App() {
   return (
     <>
     <StatusBar style="auto" />
-    <NavigationContainer style={styles.container} screenOptions={{
-      backgroundColor: 'red'
-    }}>
-      <Stack.Navigator>
-        <Stack.Screen name="ExpensesOverview" component={ExpensesOverview} options={{
-          headerShown: false
-        }}/>
-        <Stack.Screen name="ManageExpenses" component={ManageExpense} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="ExpensesOverview" component={ExpensesOverview} options={{
+            headerShown: false
+          }}/>
+          <Stack.Screen name="ManageExpenses" component={ManageExpense} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   tabBar: {
     position: 'absolute',

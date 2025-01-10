@@ -4,7 +4,7 @@ import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput'
 
 const AllExpenses = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ExpensesOutput expensesPeriod={'All Expenses'} />
     </SafeAreaView>
   )
@@ -15,5 +15,6 @@ export default AllExpenses
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff'
   }
 })
