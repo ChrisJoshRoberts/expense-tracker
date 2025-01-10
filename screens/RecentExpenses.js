@@ -6,7 +6,7 @@ import { colors } from '../constants/Colors'
 const RecentExpenses = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <ExpensesOutput expensesPeriod={'Total: Last 7 Days'} />
+      <ExpensesOutput expensesPeriod={'Total Spent: Last 7 Days'} />
     </SafeAreaView>
   )
 }

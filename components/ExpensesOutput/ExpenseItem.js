@@ -6,8 +6,8 @@ import { colors } from '../../constants/Colors'
 const ExpenseItem = ({title, description, date, amount}) => {
   const formattedDate = date.toISOString().split('T')[0]
   return (
-    <Pressable>
-      <View style={styles.listItem}>
+    <Pressable style={({pressed}) => [{opacity: pressed ? 0.5 : 1}, styles.listItem]}>
+      <View style={styles.innerListItem}>
         <View style={styles.innerWrapper}>
           <View style={styles.iconStyle}>
             <Banknote size={40} color={colors.blue}/>
@@ -37,17 +37,23 @@ const styles = StyleSheet.create({
     innerWrapper: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: 10
+      gap: 12
     },
     listItem: {
       flexDirection: 'row',
       width: '95%',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: 10,
+      padding: 16,
       backgroundColor: colors.offWhite,
       marginVertical: 5,
       borderRadius: 8
+    },
+    innerListItem: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%'
     },
     expenseTitle: {
       fontSize: 18,

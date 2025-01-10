@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import IconButtonAdd from './UI/IconButtonAdd'
 
 const ExpensesSummary = ({ period, expenses}) => {
 
@@ -11,6 +12,7 @@ const ExpensesSummary = ({ period, expenses}) => {
       <Text style={styles.periodTitle}>{period}</Text>
       <Text style={styles.totalAmount}>R{expensesTotal.toFixed(2)}</Text>
     </View>
+    <IconButtonAdd />
   </View>
   )
 }
@@ -20,12 +22,14 @@ export default ExpensesSummary
 const styles = StyleSheet.create({
   summaryContainer: {
     height: 140,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
     padding: 20,
+    flexDirection: 'row',
   },
   periodTitle: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '700',
   },
   totalAmount: {
