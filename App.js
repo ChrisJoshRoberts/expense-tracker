@@ -61,21 +61,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabBar: {
-    position: 'absolute',
-    bottom: 16,
-    width: '95%',
-    marginLeft: 10,
     borderTopWidth: 0,
     borderRadius: 10,
     height: 60,
     alignItems: 'center',
-    backgroundColor: colors.offWhite,
+    backgroundColor: '#fff',
     shadowColor: colors.baseDark,
     shadowOffset: {
       width: 0,
       height: 2
     },
-    shadowOpacity: 0.09,
+    shadowOpacity: 0.2,
     shadowRadius: 3.84,
     elevation: 5
   },

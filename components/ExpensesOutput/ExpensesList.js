@@ -27,14 +27,15 @@ function renderExpenseItem(itemData) {
 }
 
 const ExpensesList = ({expenses}) => {
+  const revesedExpenses = expenses.reverse()
   return (
-    <FlatList
-      data={expenses}
-      keyExtractor={item => item.id}
-      renderItem={renderExpenseItem}
-      style={styles.listWrapper}
-      contentContainerStyle={{alignItems: 'center'}}
-    />
+      <FlatList
+        data={expenses}
+        keyExtractor={item => item.id}
+        renderItem={renderExpenseItem}
+        style={styles.listWrapper}
+        contentContainerStyle={{alignItems: 'center', paddingBottom: 180}}
+      />
   )
 }
 

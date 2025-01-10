@@ -35,21 +35,74 @@ const dummyExpenses = [
   {
     id: '5',
     title: 'Electricity',
-    description: 'Monthly Electricity',
-    amount: 98.0,
+    description: 'monthly electricity',
+    amount: 150.0,
     date: new Date(2021, 6, 10),
+  },
+  {
+    id: '6',
+    title: 'Water',
+    description: 'monthly water',
+    amount: 100.0,
+    date: new Date(2021, 6, 5),
+  },
+  {
+    id: '7',
+    title: 'Car Payment',
+    description: 'monthly car payment',
+    amount: 350.0,
+    date: new Date(2021, 6, 3),
+  },
+  {
+    id: '8',
+    title: 'Fuel',
+    description: 'monthly fuel',
+    amount: 200.0,
+    date: new Date(2021, 6, 2),
+  },
+  {
+    id: '9',
+    title: 'Entertainment',
+    description: 'monthly entertainment',
+    amount: 100.0,
+    date: new Date(2021, 6, 1),
+  },
+  {
+    id: '10',
+    title: 'Phone',
+    description: 'monthly phone bill',
+    amount: 50.0,
+    date: new Date(2021, 6, 1),
+  },
+  {
+    id: '11',
+    title: 'Gym',
+    description: 'monthly gym membership',
+    amount: 50.0,
+    date: new Date(2021, 6, 1),
   }
+
 ]
 
 const ExpensesOutput = ({ expenses, expensesPeriod }) => {
   return (
     <View>
       <ExpensesSummary period={expensesPeriod} expenses={dummyExpenses} />
-      <ExpensesList expenses={dummyExpenses}  />
+      <View style={styles.listContainer}>
+        <ExpensesList expenses={dummyExpenses} />
+      </View>
     </View>
   )
 }
 
 export default ExpensesOutput
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  listContainer: {
+    backgroundColor: '#fff',
+    paddingTop: 16,
+    paddingBottom: 120,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  }
+})

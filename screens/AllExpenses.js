@@ -1,6 +1,8 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput'
+import { colors } from '../constants/Colors'
+
 
 const AllExpenses = () => {
   return (
@@ -15,6 +17,6 @@ export default AllExpenses
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: colors.blue
   }
 })
