@@ -2,11 +2,20 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Banknote } from 'lucide-react-native'
 import { colors } from '../../constants/Colors'
+import { useNavigation } from '@react-navigation/native'
 
 const ExpenseItem = ({title, description, date, amount}) => {
   const formattedDate = date.toISOString().split('T')[0]
+  const navigation = useNavigation()
+
+  function expensePressHandler() {
+    console.log('Expense Pressed')
+    navigation.navigate('ManageExpenses')
+  }
   return (
-    <Pressable style={({pressed}) => [{opacity: pressed ? 0.5 : 1}, styles.listItem]}>
+    <Pressable 
+    onPress={expensePressHandler}
+    style={({pressed}) => [{opacity: pressed ? 0.5 : 1}, styles.listItem]}>
       <View style={styles.innerListItem}>
         <View style={styles.innerWrapper}>
           <View style={styles.iconStyle}>
