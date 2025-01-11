@@ -8,8 +8,7 @@ const ExpenseItem = ({title, description, date, amount}) => {
   const formattedDate = date.toISOString().split('T')[0]
   const navigation = useNavigation()
 
-  function expensePressHandler() {
-    console.log('Expense Pressed')
+  function expensePressHandler() { 
     navigation.navigate('ManageExpenses')
   }
   return (

@@ -28,12 +28,12 @@ function ExpensesOverview() {
     }}>
       <Tab.Screen name="RecentExpenses" component={RecentExpenses} options={{
         tabBarIcon: ({size, color}) => (
-          <HandCoins size={size} color={color} />
+          <HandCoins size={32} color={color} />
         )
       }} />
       <Tab.Screen name="AllExpenses" component={AllExpenses} options={{
         tabBarIcon: ({size, color}) => (
-          <WalletCards  size={size} color={color} />
+          <WalletCards  size={32} color={color} />
         )
       }} />
     </Tab.Navigator>
@@ -49,7 +49,12 @@ export default function App() {
           <Stack.Screen name="ExpensesOverview" component={ExpensesOverview} options={{
             headerShown: false
           }}/>
-          <Stack.Screen name="ManageExpenses" component={ManageExpense} />
+          <Stack.Screen name="ManageExpenses" component={ManageExpense}
+            options={{
+              headerShown: false,
+              presentation: 'modal'
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
   tabBar: {
     borderTopWidth: 0,
     borderRadius: 10,
-    height: 60,
+    height: 100,
     alignItems: 'center',
     backgroundColor: '#fff',
     shadowColor: colors.baseDark,

@@ -4,11 +4,17 @@ import React from 'react'
 const ManageExpense = () => {
   return (
     <SafeAreaView>
-      <Text>ManageExpense</Text>
+      <View style={styles.container}>
+        <Text>ManageExpense</Text>
+      </View>
     </SafeAreaView>
   )
 }
 
 export default ManageExpense
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    padding: 16
+  }
+})
