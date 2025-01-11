@@ -1,11 +1,14 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const ManageExpense = () => {
+const ManageExpense = ({route}) => {
+  const editExpenseId = route.params?.expenseId
+  const isEditing = !!editExpenseId
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <Text>ManageExpense</Text>
+        <Text>{isEditing ? 'Edit Expense': 'Add Expense'}</Text>
       </View>
     </SafeAreaView>
   )

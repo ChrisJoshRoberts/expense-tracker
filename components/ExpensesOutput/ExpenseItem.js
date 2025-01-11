@@ -4,12 +4,14 @@ import { Banknote } from 'lucide-react-native'
 import { colors } from '../../constants/Colors'
 import { useNavigation } from '@react-navigation/native'
 
-const ExpenseItem = ({title, description, date, amount}) => {
+const ExpenseItem = ({id, title, description, date, amount}) => {
   const formattedDate = date.toISOString().split('T')[0]
   const navigation = useNavigation()
 
   function expensePressHandler() { 
-    navigation.navigate('ManageExpenses')
+    navigation.navigate('ManageExpenses', {
+      expenseId: id
+    })
   }
   return (
     <Pressable 
