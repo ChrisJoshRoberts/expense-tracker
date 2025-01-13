@@ -100,7 +100,7 @@ export default ExpensesOutput
 const styles = StyleSheet.create({
   listContainer: {
     backgroundColor: '#fff',
-    paddingTop: 16,
+    paddingTop: 8,
     paddingBottom: 120,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

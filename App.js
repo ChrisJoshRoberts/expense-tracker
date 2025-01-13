@@ -52,7 +52,7 @@ export default function App() {
           <Stack.Screen name="ManageExpenses" component={ManageExpense}
             options={{
               headerShown: false,
-              presentation: 'modal'
+              presentation: 'modal',
             }}
           />
         </Stack.Navigator>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   tabBar: {
     borderTopWidth: 0,
     borderRadius: 10,
-    height: 100,
+    height: '10%',
     alignItems: 'center',
     backgroundColor: '#fff',
     shadowColor: colors.baseDark,

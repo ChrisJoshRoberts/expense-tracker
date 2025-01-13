@@ -1,7 +1,5 @@
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { FlatList } from 'react-native'
 import React from 'react'
-import { Banknote } from 'lucide-react-native'
-import { colors } from '../../constants/Colors'
 import ExpenseItem from './ExpenseItem'
 
 
