@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offWhite,
     margin: 16,
     borderRadius: 12,
-    gap: 8
+    gap: 8,
   },
     removeButton: {
       flexDirection: 'row',

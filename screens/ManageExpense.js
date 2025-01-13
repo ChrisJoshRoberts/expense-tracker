@@ -2,6 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/Colors'
 import EditExpenseCard from '../components/EditExpenseCard'
+import Button from '../components/ExpensesOutput/UI/Button'
 
 
 const ManageExpense = ({route}) => {
@@ -14,12 +15,18 @@ const ManageExpense = ({route}) => {
         <Text style={styles.title}>{isEditing ? 'Edit Expense': 'Add Expense'}</Text>
       </View>
       {isEditing && 
-        <EditExpenseCard 
-          title={route.params.title} 
-          amount={route.params.amount} 
-          date={route.params.date} 
-          description={route.params.description}
-        />
+        <View style={{flex: 1}}>
+          <EditExpenseCard 
+            title={route.params.title} 
+            amount={route.params.amount} 
+            date={route.params.date} 
+            description={route.params.description}
+          />
+          <View style={styles.buttonContainer}>
+            <Button mode='flat'>Cancel</Button>
+            <Button>Save</Button>
+          </View>
+        </View>
       }
     </SafeAreaView>
   )
@@ -28,7 +35,6 @@ const ManageExpense = ({route}) => {
 export default ManageExpense
 
 const styles = StyleSheet.create({
-
   container: {
     padding: 16,
     borderBottomWidth: 1,
@@ -42,5 +48,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.baseDark
   },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 24,
+    flex: 1,
+    alignItems: 'center',
+    width: '100%'
+  }
 
 })

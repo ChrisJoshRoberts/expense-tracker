@@ -1,0 +1,35 @@
+import { Pressable, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { colors } from '../../../constants/Colors'
+
+const Button = ({children, mode}) => {
+  return (
+      <Pressable
+        style={({pressed}) => [{opacity: pressed ? 0.6 : 1}, styles.button, mode === 'flat' && styles.buttonFlat]}>
+          <Text style={[styles.buttonText, mode === 'flat' && styles.buttonTextFlat]}>{children}</Text>
+      </Pressable>
+  )
+}
+
+export default Button
+
+const styles = StyleSheet.create({
+  button: {
+    padding: 16,
+    backgroundColor: colors.primaryPurple,
+    borderRadius: 5,
+    alignItems: 'center',
+    width: '90%',
+    margin: 8
+  },
+  buttonFlat: {
+    backgroundColor: 'transparent',
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 700
+  },
+  buttonTextFlat: {
+    color: colors.primaryPurple
+  }
+})
