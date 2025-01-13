@@ -15,7 +15,7 @@ const RecentExpenses = () => {
   })
   return (
     <SafeAreaView style={styles.container}>
-      <ExpensesOutput expenses={recentExpenses} expensesPeriod={'Total Spent: Last 7 Days'} />
+      <ExpensesOutput expenses={recentExpenses} expensesPeriod={'Total Spent: Last 7 Days'} fallbackText={'No Recent Expenses!'} />
     </SafeAreaView>
   )
 }

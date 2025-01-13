@@ -3,11 +3,11 @@ import React from 'react'
 import { CircleAlert } from 'lucide-react-native'
 import { colors } from '../../../constants/Colors'
 
-const EmptyStateAlert = () => {
+const EmptyStateAlert = ({text}) => {
   return (
   <View style={styles.emptyStateContainer}>
     <CircleAlert size={24} color={colors.grey}/>
-    <Text style={styles.emptyStateText}>No recent expenses!</Text>
+    <Text style={styles.emptyStateText}>{text}</Text>
   </View>
   )
 }
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 140,
     opacity: 0.7
   },
   emptyStateText: {

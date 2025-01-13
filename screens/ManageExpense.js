@@ -20,6 +20,11 @@ const ManageExpense = ({route, navigation}) => {
     navigation.goBack()
   }
   function confirmHandler() {
+    if (isEditing) {
+      expensesCtx.updateExpense(editExpenseId, {title: 'Update Test', amount: 200, date: new Date(), description: 'Testing the update function'})
+    } else {
+      expensesCtx.addExpense({title: 'Add Test',amount: 100, date: new Date(), description: 'Testing the add function'})
+    }
     navigation.goBack()
   }
 

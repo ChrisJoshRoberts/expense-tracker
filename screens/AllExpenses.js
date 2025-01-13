@@ -9,7 +9,7 @@ const AllExpenses = () => {
   const expensesCtx = useContext(ExpensesContext)
   return (
     <SafeAreaView style={styles.container}>
-      <ExpensesOutput expenses={expensesCtx.expenses} expensesPeriod={'All Expenses'} />
+      <ExpensesOutput expenses={expensesCtx.expenses} expensesPeriod={'All Expenses'} fallbackText={'No Expenses Added!'} />
     </SafeAreaView>
   )
 }

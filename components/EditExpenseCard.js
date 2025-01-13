@@ -1,14 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/Colors'
-import { Banknote, Pencil, Trash2 } from 'lucide-react-native'
+import { Banknote, Pen, Trash2 } from 'lucide-react-native'
 
 const EditExpenseCard = ({title, amount, date, description, onPress}) => {
   return (
     <View>
       <View style={styles.editingCard}>
         <View style={styles.editBtn}>
-          <Pencil size={18} color={colors.blue}/>
+          <Pen  size={18} color={colors.blue}/>
           <Text style={{color: colors.darkGrey}}>Edit</Text>
         </View>
         <View style={styles.iconStyle}>

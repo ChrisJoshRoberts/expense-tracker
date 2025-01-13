@@ -2,18 +2,16 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import ExpensesSummary from './ExpensesSummary'
 import ExpensesList from './ExpensesList'
-import { CircleAlert } from 'lucide-react-native'
-import { colors } from '../../constants/Colors'
 import EmptyStateAlert from './UI/EmptyStateAlert'
 
 
-const ExpensesOutput = ({ expenses, expensesPeriod }) => {
+const ExpensesOutput = ({ expenses, expensesPeriod, fallbackText }) => {
   return (
     <View>
       <ExpensesSummary period={expensesPeriod} expenses={expenses} />
       <View style={styles.listContainer}>
         {expenses.length === 0 && 
-          <EmptyStateAlert />
+          <EmptyStateAlert text={fallbackText} />
         }
         <ExpensesList expenses={expenses} />
       </View>
