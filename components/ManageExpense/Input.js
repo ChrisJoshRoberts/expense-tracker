@@ -3,10 +3,16 @@ import React from 'react'
 import { colors } from '../../constants/Colors'
 
 const Input = ({label, textInputConfig}) => {
+
+  const inputStyles = [styles.input]
+
+  if (textInputConfig && textInputConfig.multiline) {
+    inputStyles.push(styles.multiLine)
+  }
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TextInput {...textInputConfig}  style={styles.input}/>
+      <TextInput {...textInputConfig}  style={inputStyles}/>
     </View>
   )
 }
@@ -30,5 +36,9 @@ const styles = StyleSheet.create({
     color: colors.baseDark,
     fontWeight: 700,
     backgroundColor: colors.offWhite
+  }, 
+  multiLine: {
+    minHeight: 100,
+    textAlignVertical: 'top',
   }
 })
