@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import { colors } from '../constants/Colors'
 import EditExpenseCard from '../components/EditExpenseCard'

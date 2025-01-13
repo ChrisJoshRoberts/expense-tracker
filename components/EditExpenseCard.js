@@ -14,9 +14,9 @@ const EditExpenseCard = ({title, amount, date, description, onPress}) => {
         <View style={styles.iconStyle}>
           <Banknote size={32} color={colors.blue}/>
         </View>
+        <Text style={styles.exAmount}>-R{amount.toFixed(2)}</Text>
         <Text style={styles.expenseTitle}>{title}</Text>
         <Text style={styles.exDesctiotion}>{description}</Text>
-        <Text style={styles.exAmount}>-R{amount.toFixed(2)}</Text>
         <Text style={{color: colors.darkGrey}}>{date.toISOString().split('T')[0]}</Text>
       </View>
       <View>
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   editingCard: {
+    height: 250,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
@@ -72,5 +73,6 @@ const styles = StyleSheet.create({
     exAmount: {
       color: colors.error,
       fontWeight: 700,
+      fontSize: 32
     }
 })

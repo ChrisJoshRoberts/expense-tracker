@@ -7,15 +7,19 @@ import { StyleSheet, View } from 'react-native';
 import ManageExpense from './screens/ManageExpense';
 import RecentExpenses from './screens/RecentExpenses';
 import { colors } from './constants/Colors';
-import { HandCoins,  WalletCards  } from 'lucide-react-native';
+import { HandCoins,  WalletCards, ChartPie } from 'lucide-react-native';
 import ExpensesContextProvider from './store/expenses-context';
+import Budget from './screens/Budget';
+
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
 function ExpensesOverview() {
   return (
-    <Tab.Navigator screenOptions={{
+    <Tab.Navigator 
+    initialRouteName='Budget'
+    screenOptions={{
       headerShown: false,
       tabBarStyle: styles.tabBar,
       tabBarActiveTintColor: colors.primaryPurple,
@@ -27,6 +31,11 @@ function ExpensesOverview() {
         padding: 10
       }
     }}>
+      <Tab.Screen name="Budget" component={Budget} options={{
+        tabBarIcon: ({size, color}) => (
+          <ChartPie  size={32} color={color} />
+        )
+      }} />
       <Tab.Screen name="RecentExpenses" component={RecentExpenses} options={{
         tabBarIcon: ({size, color}) => (
           <HandCoins size={32} color={color} />
