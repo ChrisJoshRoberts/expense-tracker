@@ -1,5 +1,6 @@
 export const colors = {
   primaryPurple: '#7F3DFF',
+  primaryPurple2: '#7e3dff5c',
   offWhite: '#F1F1FA',
   offWhite2: '#E3E5E5',
   error: '#FD3C4A',
