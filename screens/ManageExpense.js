@@ -1,9 +1,10 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useContext } from 'react'
 import { colors } from '../constants/Colors'
 import EditExpenseCard from '../components/EditExpenseCard'
 import Button from '../components/ExpensesOutput/UI/Button'
 import { ExpensesContext } from '../store/expenses-context'
+import ExpenseForm from '../components/ManageExpense/ExpenseForm'
 
 
 const ManageExpense = ({route, navigation}) => {
@@ -44,6 +45,12 @@ const ManageExpense = ({route, navigation}) => {
           />
         </View>
       }
+      {
+        !isEditing &&
+        <View style={styles.formContainer}>
+          <ExpenseForm />
+        </View>
+      }
         <View style={styles.buttonContainer}>
             <Button onPress={cancelHandler} mode='flat'>Cancel</Button>
             <Button onPress={confirmHandler}>{isEditing ? 'Update': 'Add'}</Button>
@@ -74,6 +81,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     width: '100%'
+  },
+  formContainer: {
+    flex: 1,
+    padding: 16,
   }
-
 })
