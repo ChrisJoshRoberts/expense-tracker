@@ -12,7 +12,7 @@ const Input = ({label, textInputConfig}) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TextInput {...textInputConfig}  style={inputStyles}/>
+      <TextInput style={inputStyles} {...textInputConfig}  />
     </View>
   )
 }
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     color: colors.primaryPurple
   },
   input: {
-    height: 40,
+    height: 48,
     borderRadius: 4,
     padding: 8,
     marginBottom: 20,
@@ -40,5 +40,7 @@ const styles = StyleSheet.create({
   multiLine: {
     minHeight: 100,
     textAlignVertical: 'top',
+    fontSize: 16,
+    fontWeight: 400
   }
 })

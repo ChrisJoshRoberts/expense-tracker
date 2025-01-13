@@ -23,7 +23,7 @@ const ExpenseForm = () => {
       <Text style={styles.label}>Category</Text>
       <DropDownInput />
       <Input label={'Description'} textInputConfig={{
-        multiLine: true,
+        multiline: true,
       }} />
     </View>
   )
