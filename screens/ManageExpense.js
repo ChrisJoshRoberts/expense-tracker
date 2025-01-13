@@ -1,15 +1,18 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { colors } from '../constants/Colors'
 import EditExpenseCard from '../components/EditExpenseCard'
 import Button from '../components/ExpensesOutput/UI/Button'
+import { ExpensesContext } from '../store/expenses-context'
 
 
 const ManageExpense = ({route, navigation}) => {
+  const expensesCtx = useContext(ExpensesContext)
   const editExpenseId = route.params?.expenseId
   const isEditing = !!editExpenseId
 
   function deleteHandler() {
+    expensesCtx.deleteExpense(editExpenseId)
     navigation.goBack()
   }
 

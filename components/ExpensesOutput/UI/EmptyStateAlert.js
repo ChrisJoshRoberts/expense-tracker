@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40,
+    opacity: 0.7
   },
   emptyStateText: {
     color: colors.grey,

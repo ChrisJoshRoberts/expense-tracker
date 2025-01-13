@@ -6,7 +6,7 @@ const dummyExpenses = [
     title: 'Groceries',
     description: 'buying daily groceries',
     amount: 94.12,
-    date: new Date(2021, 6, 14),
+    date: new Date(2025, 1, 10),
   },
   {
     id: '2',
