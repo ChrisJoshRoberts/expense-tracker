@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/Colors'
 import { Banknote, Pencil, Trash2 } from 'lucide-react-native'
 
-const EditExpenseCard = ({title, amount, date, description}) => {
+const EditExpenseCard = ({title, amount, date, description, onPress}) => {
   return (
     <View>
       <View style={styles.editingCard}>
@@ -19,9 +19,11 @@ const EditExpenseCard = ({title, amount, date, description}) => {
         <Text style={styles.exAmount}>-R{amount.toFixed(2)}</Text>
         <Text style={{color: colors.darkGrey}}>{date.toISOString().split('T')[0]}</Text>
       </View>
-      <View style={styles.removeButton}>
-          <Trash2 size={24} color={colors.error} style={{}}/>
+      <View>
+        <Pressable onPress={onPress} style={({pressed}) => [{opacity: pressed ? 0.6 : 1}, styles.removeButton]}>
+          <Trash2 size={24} color={colors.error}/>
           <Text style={{color: colors.error, fontWeight: 700}}>Remove</Text>
+        </Pressable>
         </View>
     </View>
   )

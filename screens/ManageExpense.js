@@ -5,9 +5,20 @@ import EditExpenseCard from '../components/EditExpenseCard'
 import Button from '../components/ExpensesOutput/UI/Button'
 
 
-const ManageExpense = ({route}) => {
+const ManageExpense = ({route, navigation}) => {
   const editExpenseId = route.params?.expenseId
   const isEditing = !!editExpenseId
+
+  function deleteHandler() {
+    navigation.goBack()
+  }
+
+  function cancelHandler() {
+    navigation.goBack()
+  }
+  function confirmHandler() {
+    navigation.goBack()
+  }
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
@@ -21,13 +32,14 @@ const ManageExpense = ({route}) => {
             amount={route.params.amount} 
             date={route.params.date} 
             description={route.params.description}
+            onPress={deleteHandler}
           />
-          <View style={styles.buttonContainer}>
-            <Button mode='flat'>Cancel</Button>
-            <Button>Save</Button>
-          </View>
         </View>
       }
+        <View style={styles.buttonContainer}>
+            <Button onPress={cancelHandler} mode='flat'>Cancel</Button>
+            <Button onPress={confirmHandler}>{isEditing ? 'Update': 'Add'}</Button>
+          </View>
     </SafeAreaView>
   )
 }
