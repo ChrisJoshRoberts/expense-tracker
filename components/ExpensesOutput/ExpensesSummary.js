@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import IconButtonAdd from './UI/IconButtonAdd'
 
-const ExpensesSummary = ({ period, expenses}) => {
+const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
 
   const expensesTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0)
 
@@ -12,7 +12,7 @@ const ExpensesSummary = ({ period, expenses}) => {
       <Text style={styles.periodTitle}>{period}</Text>
       <Text style={styles.totalAmount}>R{expensesTotal.toFixed(2)}</Text>
     </View>
-    <IconButtonAdd />
+    <IconButtonAdd title={buttonTitle} />
   </View>
   )
 }

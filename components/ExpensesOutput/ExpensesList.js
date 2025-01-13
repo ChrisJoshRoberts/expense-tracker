@@ -9,14 +9,14 @@ function renderExpenseItem(itemData) {
   )
 }
 
-const ExpensesList = ({expenses}) => {
+const ExpensesList = ({expenses, style}) => {
   const revesedExpenses = expenses.reverse()
   return (
       <FlatList
         data={expenses}
         keyExtractor={item => item.id}
         renderItem={renderExpenseItem}
-        contentContainerStyle={{alignItems: 'center', paddingBottom: 180}}
+        contentContainerStyle={[{alignItems: 'center', paddingBottom: 180}, style]}
       />
   )
 }

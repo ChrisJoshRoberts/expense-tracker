@@ -3,7 +3,7 @@ import React from 'react'
 import { Plus } from 'lucide-react-native'
 import { useNavigation } from '@react-navigation/native'
 
-const IconButtonAdd = () => {
+const IconButtonAdd = ({title}) => {
   const navigation = useNavigation()
 
   const iconBtnPressHandler = () => {
@@ -16,7 +16,7 @@ const IconButtonAdd = () => {
       style={({pressed}) => [{opacity: pressed ? 0.6 : 1}]} >
       <View style={styles.button}>
         <Plus size={24} color={'#fff'} strokeWidth={1.2}/>
-        <Text style={styles.buttonText}>Add Expense</Text>
+        <Text style={styles.buttonText}>{title}</Text>
       </View>
     </Pressable>
   )

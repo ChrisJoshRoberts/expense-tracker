@@ -5,10 +5,10 @@ import ExpensesList from './ExpensesList'
 import EmptyStateAlert from './UI/EmptyStateAlert'
 
 
-const ExpensesOutput = ({ expenses, expensesPeriod, fallbackText }) => {
+const ExpensesOutput = ({ expenses, expensesPeriod, fallbackText, buttonTitle}) => {
   return (
     <View>
-      <ExpensesSummary period={expensesPeriod} expenses={expenses} />
+      <ExpensesSummary period={expensesPeriod} expenses={expenses} buttonTitle={buttonTitle}/>
       <View style={styles.listContainer}>
         {expenses.length === 0 && 
           <EmptyStateAlert text={fallbackText} />
