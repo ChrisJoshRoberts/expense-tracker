@@ -9,10 +9,13 @@ const IconButtonAdd = ({title}) => {
   const iconBtnPressHandler = () => {
     navigation.navigate('ManageExpenses')
   }
+  const addBudgetHandler = () => {
+    navigation.navigate('AddBudget')
+  }
 
   return (
     <Pressable 
-      onPress={iconBtnPressHandler}
+      onPress={title === 'Add Budget' ?  addBudgetHandler : iconBtnPressHandler }
       style={({pressed}) => [{opacity: pressed ? 0.6 : 1}]} >
       <View style={styles.button}>
         <Plus size={24} color={'#fff'} strokeWidth={1.2}/>

@@ -10,7 +10,7 @@ const Input = ({label, textInputConfig}) => {
     inputStyles.push(styles.multiLine)
   }
   return (
-    <View>
+    <View style={{width: '100%'}}>
       <Text style={styles.label}>{label}</Text>
       <TextInput style={inputStyles} {...textInputConfig}  />
     </View>

@@ -10,6 +10,7 @@ import { colors } from './constants/Colors';
 import { HandCoins,  WalletCards, ChartPie } from 'lucide-react-native';
 import ExpensesContextProvider from './store/expenses-context';
 import Budget from './screens/Budget';
+import AddBudget from './screens/AddBudget';
 
 
 const Stack = createNativeStackNavigator()
@@ -61,6 +62,12 @@ export default function App() {
               headerShown: false
             }}/>
             <Stack.Screen name="ManageExpenses" component={ManageExpense}
+              options={{
+                headerShown: false,
+                presentation: 'modal',
+              }}
+            />
+            <Stack.Screen name="AddBudget" component={AddBudget} 
               options={{
                 headerShown: false,
                 presentation: 'modal',

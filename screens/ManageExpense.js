@@ -52,9 +52,9 @@ const ManageExpense = ({route, navigation}) => {
         </View>
       }
         <View style={styles.buttonContainer}>
-            <Button onPress={cancelHandler} mode='flat'>Cancel</Button>
-            <Button onPress={confirmHandler}>{isEditing ? 'Update': 'Add'}</Button>
-          </View>
+          <Button onPress={cancelHandler} mode='flat'>Cancel</Button>
+          <Button onPress={confirmHandler}>{isEditing ? 'Update': 'Add'}</Button>
+        </View>
     </SafeAreaView>
   )
 }
