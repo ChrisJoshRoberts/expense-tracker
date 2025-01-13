@@ -16,7 +16,7 @@ const ExpensesList = ({expenses, style}) => {
         data={expenses}
         keyExtractor={item => item.id}
         renderItem={renderExpenseItem}
-        contentContainerStyle={[{alignItems: 'center', paddingBottom: 180}, style]}
+        contentContainerStyle={[{alignItems: 'center', paddingBottom: 180}, style ]}
       />
   )
 }
