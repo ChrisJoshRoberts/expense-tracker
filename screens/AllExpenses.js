@@ -1,13 +1,15 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput'
 import { colors } from '../constants/Colors'
+import { ExpensesContext } from '../store/expenses-context'
 
 
 const AllExpenses = () => {
+  const expensesCtx = useContext(ExpensesContext)
   return (
     <SafeAreaView style={styles.container}>
-      <ExpensesOutput expensesPeriod={'All Expenses'} />
+      <ExpensesOutput expenses={expensesCtx.expenses} expensesPeriod={'All Expenses'} />
     </SafeAreaView>
   )
 }

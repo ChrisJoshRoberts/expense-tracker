@@ -4,7 +4,6 @@ import ExpenseItem from './ExpenseItem'
 
 
 function renderExpenseItem(itemData) {
-
   return (
     <ExpenseItem {...itemData.item} />
   )

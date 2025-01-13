@@ -1,4 +1,4 @@
-import { useReducer } from "react"
+import { createContext, useReducer } from "react"
 
 const dummyExpenses = [
   {
@@ -119,7 +119,13 @@ function ExpensesContextProvider({children}) {
   function updateExpense(id, expenseData){
     dispatch({type: 'UPDATE', payload: {id: id, data: expenseData}})
   }
-  return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>
+  const value = {
+    expenses: expenseState,
+    addExpense: addExpense,
+    deleteExpense: deleteExpense,
+    updateExpense: updateExpense
+  }
+  return <ExpensesContext.Provider value={value}>{children}</ExpensesContext.Provider>
 }
 
 export default ExpensesContextProvider

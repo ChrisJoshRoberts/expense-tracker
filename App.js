@@ -8,6 +8,7 @@ import ManageExpense from './screens/ManageExpense';
 import RecentExpenses from './screens/RecentExpenses';
 import { colors } from './constants/Colors';
 import { HandCoins,  WalletCards  } from 'lucide-react-native';
+import ExpensesContextProvider from './store/expenses-context';
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -44,19 +45,21 @@ export default function App() {
   return (
     <>
     <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="ExpensesOverview" component={ExpensesOverview} options={{
-            headerShown: false
-          }}/>
-          <Stack.Screen name="ManageExpenses" component={ManageExpense}
-            options={{
-              headerShown: false,
-              presentation: 'modal',
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ExpensesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="ExpensesOverview" component={ExpensesOverview} options={{
+              headerShown: false
+            }}/>
+            <Stack.Screen name="ManageExpenses" component={ManageExpense}
+              options={{
+                headerShown: false,
+                presentation: 'modal',
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ExpensesContextProvider>
     </>
   );
 }
