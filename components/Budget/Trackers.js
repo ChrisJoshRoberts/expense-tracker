@@ -9,7 +9,7 @@ const Trackers = () => {
   const expensesTotal = expensesCtx.expenses.reduce((acc, expense) => { acc += expense.amount; return acc }, 0)
   return (
     <View style={styles.container}>
-      <TrackerCard title='Income' amount={5000}/>
+      <TrackerCard title='Income' amount={50000}/>
       <TrackerCard mode='Expense' title='Expense' amount={expensesTotal}/>
     </View>
   )

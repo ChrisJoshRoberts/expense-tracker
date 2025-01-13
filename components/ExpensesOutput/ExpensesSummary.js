@@ -6,11 +6,20 @@ const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
 
   const expensesTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0)
 
+  const testBudget = 50000 - expensesTotal
+
+  let totalAmount = expensesTotal
+
+  if (period === 'Monthly Budget') {
+    totalAmount = testBudget
+  }
+
+
   return (
   <View style={styles.summaryContainer}>
     <View style={styles.innerSummary}>
       <Text style={styles.periodTitle}>{period}</Text>
-      <Text style={styles.totalAmount}>R{expensesTotal.toFixed(2)}</Text>
+      <Text style={styles.totalAmount}>R{totalAmount.toFixed(2)}</Text>
     </View>
     <IconButtonAdd title={buttonTitle} />
   </View>
