@@ -16,7 +16,7 @@ const TransactionList = () => {
   return (
     <View>
       <View style={styles.transactionTitleContainer}>
-        <Text style={styles.transactionTitle}>Recent Transactions</Text>
+        <Text style={styles.transactionTitle}>Recent Expenses</Text>
         <PillButton title='See All' onPress={pressHandler} />
       </View>
       <ExpensesList expenses={expensesCtx.expenses} style={{paddingBottom: 324}} />
