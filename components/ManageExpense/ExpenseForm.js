@@ -4,10 +4,8 @@ import Input from './Input'
 import { colors } from '../../constants/Colors'
 import DropDownInput from './DropDownInput'
 import Button from '../ExpensesOutput/UI/Button'
-import { useNavigation } from '@react-navigation/native'
 
-const ExpenseForm = ({onCancel, submitButtonLabel, onSubmit}) => {
-const navigation = useNavigation()
+const ExpenseForm = ({onCancel, submitButtonLabel, onSubmit, title}) => {
 const [inputValue, setInputValue] = useState({
   title: '',
   amount: '',
@@ -35,7 +33,7 @@ const [inputValue, setInputValue] = useState({
   }
   return (
     <View style={{flex: 1}}>
-      <Text style={styles.expenseTitle}>New Expense</Text>
+      <Text style={styles.expenseTitle}>{title}</Text>
       <Input label={'Title'}  
         textInputConfig={{
           placeholder: 'Enter title',

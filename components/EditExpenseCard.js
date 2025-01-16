@@ -3,14 +3,16 @@ import React from 'react'
 import { colors } from '../constants/Colors'
 import { Banknote, Pen, Trash2 } from 'lucide-react-native'
 
-const EditExpenseCard = ({title, amount, date, description, onPress}) => {
+const EditExpenseCard = ({title, amount, date, description, onPress, onEdit}) => {
   return (
     <View>
       <View style={styles.editingCard}>
-        <View style={styles.editBtn}>
+        <Pressable
+          onPress={onEdit} 
+          style={styles.editBtn}>
           <Pen  size={18} color={colors.blue}/>
           <Text style={{color: colors.darkGrey}}>Edit</Text>
-        </View>
+        </Pressable>
         <View style={styles.iconStyle}>
           <Banknote size={32} color={colors.blue}/>
         </View>

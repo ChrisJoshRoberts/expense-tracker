@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { colors } from '../constants/Colors'
 import EditExpenseCard from '../components/EditExpenseCard'
 import { ExpensesContext } from '../store/expenses-context'
@@ -10,6 +10,7 @@ const ManageExpense = ({route, navigation}) => {
   const expensesCtx = useContext(ExpensesContext)
   const editExpenseId = route.params?.expenseId
   const isEditing = !!editExpenseId
+  const [isEditingForm, setIsEditingForm] = useState(false)
 
   function deleteHandler() {
     expensesCtx.deleteExpense(editExpenseId)
@@ -27,33 +28,45 @@ const ManageExpense = ({route, navigation}) => {
     }
     navigation.goBack()
   }
+  function editHandler () {
+    setIsEditingForm(true)
+  }
+  const existingExpenseData = {
+    title: route.params?.title,
+    amount: route.params?.amount,
+    date: route.params?.date,
+    description: route.params?.description,
+  }
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={styles.container}>
         <Text style={styles.title}>{isEditing ? 'Edit Expense': 'Add Expense'}</Text>
       </View>
-      {isEditing && 
-        <View style={{flex: 1}}>
-          <EditExpenseCard 
-            title={route.params.title} 
-            amount={route.params.amount} 
-            date={route.params.date} 
-            description={route.params.description}
+      {isEditing && !isEditingForm && (
+        <View style={{ flex: 1 }}>
+          <EditExpenseCard
+            title={existingExpenseData.title}
+            amount={existingExpenseData.amount}
+            date={existingExpenseData.date}
+            description={existingExpenseData.description}
             onPress={deleteHandler}
+            onEdit={editHandler}
           />
         </View>
-      }
-      {
-        !isEditing &&
+      )}
+      {(isEditingForm || !isEditing) && (
         <View style={styles.formContainer}>
-          <ExpenseForm 
-            submitButtonLabel={isEditing ? 'Update' : 'Add'}  
+          <ExpenseForm
+            title={isEditing ? 'Edit Expense' : 'New Expense'}
+            submitButtonLabel={isEditing ? 'Update' : 'Add'}
             onCancel={cancelHandler}
             onSubmit={confirmHandler}
+            // Pass the existing data for prepopulation
+            initialValues={isEditing ? existingExpenseData : undefined}
           />
         </View>
-      }
+      )}
     </SafeAreaView>
   )
 }
