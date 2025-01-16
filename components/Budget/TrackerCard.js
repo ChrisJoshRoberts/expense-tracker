@@ -2,12 +2,19 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { ArrowBigDownDash, Plus } from 'lucide-react-native'
 import { colors } from '../../constants/Colors'
+import { useNavigation } from '@react-navigation/native'
 
 const TrackerCard = ({mode, title, amount}) => {
+  const navigation = useNavigation()
+  const pressAddHandler = () => {
+    navigation.navigate('AddIncome')
+  }
   return (
     <View style={styles.trackerCardContainer}>
       {mode !== 'Expense' &&
-      <Pressable style={({pressed})=> [styles.plusIcon, {opacity: pressed ? 0.6: 1}]}>
+      <Pressable 
+        onPress={pressAddHandler}
+        style={({pressed})=> [styles.plusIcon, {opacity: pressed ? 0.6: 1}]}>
         <View style={styles.innerPlusIcon}>
           <Plus size={16} color={'#fff'}/>
           <Text style={{color: '#fff', fontWeight: 700, fontSize: 14, paddingRight: 4}}>Add</Text>
