@@ -1,6 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import BudgetForm from '../components/Budget/BudgetForm'
 import { colors } from '../constants/Colors'
 import IncomeForm from '../components/Icome/IncomeForm'
 
