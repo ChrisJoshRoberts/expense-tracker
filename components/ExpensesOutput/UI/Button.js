@@ -20,14 +20,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     width: '90%',
-    margin: 8
+    margin: 4
   },
   buttonFlat: {
     backgroundColor: 'transparent',
+    padding: 8, 
   },
   buttonText: {
     color: '#fff',
-    fontWeight: 700
+    fontWeight: 700,
+    fontSize: 16
   },
   buttonTextFlat: {
     color: colors.primaryPurple

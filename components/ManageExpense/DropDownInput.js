@@ -16,7 +16,7 @@ import {
   PiggyBank, 
   ShieldQuestion } from 'lucide-react-native'
 
-const DropDownInput = () => {
+const DropDownInput = ({onSelectItem, valueDropdown}) => {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState(null)
   const [items, setItems] = useState([
@@ -114,7 +114,7 @@ const DropDownInput = () => {
       setOpen={setOpen}
       setValue={setValue}
       setItems={setItems}
-      onChangeValue={(value) => console.log(value)}
+      onChangeValue={onSelectItem}
       placeholder={'Select Category'}
       style={styles.dropdown}
       textStyle={styles.dropdownText}

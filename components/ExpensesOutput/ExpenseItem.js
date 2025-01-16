@@ -4,7 +4,7 @@ import { Banknote } from 'lucide-react-native'
 import { colors } from '../../constants/Colors'
 import { useNavigation } from '@react-navigation/native'
 
-const ExpenseItem = ({id, title, description, date, amount}) => {
+const ExpenseItem = ({id, title, description, date, amount, category}) => {
   const formattedDate = date.toISOString().split('T')[0]
   const navigation = useNavigation()
 
@@ -14,7 +14,8 @@ const ExpenseItem = ({id, title, description, date, amount}) => {
       amount: amount,
       title: title,
       description: description,
-      date: date
+      date: date,
+      category: category
     })
   }
   return (

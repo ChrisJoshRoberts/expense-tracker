@@ -6,7 +6,7 @@ const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
 
   const expensesTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0)
 
-  const testBudget = 50000 - expensesTotal
+  const testBudget = 30000 - expensesTotal
 
   let totalAmount = expensesTotal
 

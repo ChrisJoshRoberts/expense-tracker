@@ -7,6 +7,7 @@ const dummyExpenses = [
     description: 'buying daily groceries',
     amount: 94.12,
     date: new Date(2025, 1, 10),
+    category: 'Food'
   },
   {
     id: '2',
@@ -14,6 +15,7 @@ const dummyExpenses = [
     description: 'monthly rent',
     amount: 800.0,
     date: new Date(2021, 6, 1),
+    category: 'Rent'
   },
   {
     id: '3',
@@ -21,6 +23,7 @@ const dummyExpenses = [
     description: 'monthly insurance',
     amount: 294.67,
     date: new Date(2021, 5, 20),
+    category: 'Insurance'
   },
   {
     id: '4',
@@ -28,6 +31,7 @@ const dummyExpenses = [
     description: 'monthly internet',
     amount: 45.0,
     date: new Date(2021, 6, 16),
+    category: 'Internet'
   },
   {
     id: '5',
@@ -35,6 +39,7 @@ const dummyExpenses = [
     description: 'monthly electricity',
     amount: 150.0,
     date: new Date(2021, 6, 10),
+    category: 'Utilities'
   },
   {
     id: '6',
@@ -42,6 +47,7 @@ const dummyExpenses = [
     description: 'monthly water',
     amount: 100.0,
     date: new Date(2021, 6, 5),
+    category: 'Utilities'
   },
   {
     id: '7',
@@ -49,6 +55,7 @@ const dummyExpenses = [
     description: 'monthly car payment',
     amount: 350.0,
     date: new Date(2021, 6, 3),
+    category: 'Transport'
   },
   {
     id: '8',
@@ -56,6 +63,7 @@ const dummyExpenses = [
     description: 'monthly fuel',
     amount: 200.0,
     date: new Date(2021, 6, 2),
+    category: 'Transport'
   },
   {
     id: '9',
@@ -63,6 +71,7 @@ const dummyExpenses = [
     description: 'monthly entertainment',
     amount: 100.0,
     date: new Date(2021, 6, 1),
+    category: 'Entertainment'
   },
   {
     id: '10',
@@ -70,6 +79,7 @@ const dummyExpenses = [
     description: 'monthly phone bill',
     amount: 50.0,
     date: new Date(2021, 6, 1),
+    category: 'Phone'
   },
   {
     id: '11',
@@ -77,6 +87,7 @@ const dummyExpenses = [
     description: 'monthly gym membership',
     amount: 50.0,
     date: new Date(2021, 6, 1),
+    category: 'Other'
   }
 
 ]

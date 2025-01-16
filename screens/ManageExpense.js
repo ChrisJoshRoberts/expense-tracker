@@ -48,13 +48,9 @@ const ManageExpense = ({route, navigation}) => {
       {
         !isEditing &&
         <View style={styles.formContainer}>
-          <ExpenseForm />
+          <ExpenseForm submitButtonLabel={isEditing ? 'Update' : 'Add'}  onCancel={cancelHandler}/>
         </View>
       }
-        <View style={styles.buttonContainer}>
-          <Button onPress={cancelHandler} mode='flat'>Cancel</Button>
-          <Button onPress={confirmHandler}>{isEditing ? 'Update': 'Add'}</Button>
-        </View>
     </SafeAreaView>
   )
 }
@@ -74,13 +70,6 @@ const styles = StyleSheet.create({
     width: '100%', 
     textAlign: 'center',
     color: colors.baseDark
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 24,
-    flex: 1,
-    alignItems: 'center',
-    width: '100%'
   },
   formContainer: {
     flex: 1,

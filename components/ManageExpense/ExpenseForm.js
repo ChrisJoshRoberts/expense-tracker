@@ -1,30 +1,62 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Input from './Input'
 import { colors } from '../../constants/Colors'
 import DropDownInput from './DropDownInput'
+import Button from '../ExpensesOutput/UI/Button'
 
-const ExpenseForm = () => {
+const ExpenseForm = ({onCancel, submitButtonLabel}) => {
+const [inputValue, setInputValue] = useState({
+  title: '',
+  amount: '',
+  description: '',
+  category: ''
+});
 
-  const amountChangedHandler = () => {
-    console.log('amount changed')
+  const inputChangedHandler = (inputIdentifier, enteredValue) => {
+    setInputValue((currentInputValues) => {
+      return {
+        ...currentInputValues,
+        [inputIdentifier]: enteredValue
+      }
+    })
+  }
+  const submitHandler = () => {
+    console.log(inputValue)
   }
   return (
-    <View>
-      <Input label={'Title'}  />
+    <View style={{flex: 1}}>
+      <Text style={styles.expenseTitle}>New Expense</Text>
+      <Input label={'Title'}  
+        textInputConfig={{
+          placeholder: 'Enter title',
+          onChangeText: inputChangedHandler.bind(this, 'title'),
+          value: inputValue.title
+        }}
+      />
       <Input 
         label={'Amount'} 
         textInputConfig={{
           keyboardType: 'decimal-pad',
-          plaholder: 'Enter amount',
-          onChangeText: amountChangedHandler,
-
+          placeholder: 'Enter amount',
+          onChangeText: inputChangedHandler.bind(this, 'amount'),
+          value: inputValue.amount
         }}/>
       <Text style={styles.label}>Category</Text>
-      <DropDownInput />
+      <DropDownInput 
+        onSelectItem={inputChangedHandler.bind(this, 'category')} 
+        valueDropdown={inputValue.category}
+      />
       <Input label={'Description'} textInputConfig={{
+        placeholder: 'Enter description',
+        onChangeText: inputChangedHandler.bind(this, 'description'),
+        value: inputValue.description,
         multiline: true,
       }} />
+        <View style={styles.buttonContainer}>
+          <Button onPress={onCancel} mode='flat'>Cancel</Button>
+          <Button onPress={submitHandler}>{submitButtonLabel}</Button>
+        </View>
     </View>
   )
 }
@@ -38,4 +70,18 @@ const styles = StyleSheet.create({
       marginBottom: 4,
       color: colors.primaryPurple
     },
+    expenseTitle : {
+      fontSize: 18,
+      fontWeight: 700,
+      color: colors.baseDark,
+      marginBottom: 16
+    },
+    buttonContainer: {
+      position: 'absolute',
+      bottom: 0,
+      flex: 1,
+      alignItems: 'center',
+      width: '100%'
+    },
+
 })
