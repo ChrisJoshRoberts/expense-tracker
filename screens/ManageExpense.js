@@ -2,7 +2,6 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import { colors } from '../constants/Colors'
 import EditExpenseCard from '../components/EditExpenseCard'
-import Button from '../components/ExpensesOutput/UI/Button'
 import { ExpensesContext } from '../store/expenses-context'
 import ExpenseForm from '../components/ManageExpense/ExpenseForm'
 
@@ -20,11 +19,11 @@ const ManageExpense = ({route, navigation}) => {
   function cancelHandler() {
     navigation.goBack()
   }
-  function confirmHandler() {
+  function confirmHandler(expenseData) {
     if (isEditing) {
-      expensesCtx.updateExpense(editExpenseId, {title: 'Update Test', amount: 200, date: new Date(), description: 'Testing the update function'})
+      expensesCtx.updateExpense(editExpenseId, expenseData)
     } else {
-      expensesCtx.addExpense({title: 'Add Test',amount: 10000, date: new Date(), description: 'Testing the add function'})
+      expensesCtx.addExpense(expenseData)
     }
     navigation.goBack()
   }
@@ -48,7 +47,11 @@ const ManageExpense = ({route, navigation}) => {
       {
         !isEditing &&
         <View style={styles.formContainer}>
-          <ExpenseForm submitButtonLabel={isEditing ? 'Update' : 'Add'}  onCancel={cancelHandler}/>
+          <ExpenseForm 
+            submitButtonLabel={isEditing ? 'Update' : 'Add'}  
+            onCancel={cancelHandler}
+            onSubmit={confirmHandler}
+          />
         </View>
       }
     </SafeAreaView>
