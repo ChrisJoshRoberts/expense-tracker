@@ -4,6 +4,7 @@ import { colors } from '../constants/Colors'
 import EditExpenseCard from '../components/EditExpenseCard'
 import { ExpensesContext } from '../store/expenses-context'
 import ExpenseForm from '../components/ManageExpense/ExpenseForm'
+import Button from '../components/ExpensesOutput/UI/Button'
 
 
 const ManageExpense = ({route, navigation}) => {
@@ -11,6 +12,8 @@ const ManageExpense = ({route, navigation}) => {
   const editExpenseId = route.params?.expenseId
   const isEditing = !!editExpenseId
   const [isEditingForm, setIsEditingForm] = useState(false)
+
+  const selectedExpense = expensesCtx.expenses.find(expense => expense.id === editExpenseId)
 
   function deleteHandler() {
     expensesCtx.deleteExpense(editExpenseId)
@@ -52,7 +55,11 @@ const ManageExpense = ({route, navigation}) => {
             description={existingExpenseData.description}
             onPress={deleteHandler}
             onEdit={editHandler}
+            
           />
+          <View style={styles.buttonContainer}>
+            <Button onPress={cancelHandler}>Cancel</Button>
+          </View>
         </View>
       )}
       {(isEditingForm || !isEditing) && (
@@ -62,8 +69,7 @@ const ManageExpense = ({route, navigation}) => {
             submitButtonLabel={isEditing ? 'Update' : 'Add'}
             onCancel={cancelHandler}
             onSubmit={confirmHandler}
-            // Pass the existing data for prepopulation
-            initialValues={isEditing ? existingExpenseData : undefined}
+            defaultValues={selectedExpense}
           />
         </View>
       )}
@@ -90,5 +96,12 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     padding: 16,
-  }
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 16,
+    flex: 1,
+    alignItems: 'center',
+    width: '100%'
+  },
 })

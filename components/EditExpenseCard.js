@@ -4,14 +4,15 @@ import { colors } from '../constants/Colors'
 import { Banknote, Pen, Trash2 } from 'lucide-react-native'
 
 const EditExpenseCard = ({title, amount, date, description, onPress, onEdit}) => {
+  const parsedDate = new Date(date)
   return (
     <View>
       <View style={styles.editingCard}>
         <Pressable
           onPress={onEdit} 
-          style={styles.editBtn}>
-          <Pen  size={18} color={colors.blue}/>
-          <Text style={{color: colors.darkGrey}}>Edit</Text>
+          style={({pressed}) => [{opacity: pressed ? 0.5 : 1}, styles.editBtn]}>
+          <Pen  size={18} fill={colors.primaryPurple} color={colors.primaryPurple}/>
+          <Text style={{color: colors.primaryPurple}}>Edit</Text>
         </Pressable>
         <View style={styles.iconStyle}>
           <Banknote size={32} color={colors.blue}/>
@@ -19,7 +20,7 @@ const EditExpenseCard = ({title, amount, date, description, onPress, onEdit}) =>
         <Text style={styles.exAmount}>-R{amount.toFixed(2)}</Text>
         <Text style={styles.expenseTitle}>{title}</Text>
         <Text style={styles.exDesctiotion}>{description}</Text>
-        <Text style={{color: colors.darkGrey}}>{date.toISOString().split('T')[0]}</Text>
+        <Text style={{color: colors.darkGrey}}>{parsedDate.toLocaleDateString()}</Text>
       </View>
       <View>
         <Pressable onPress={onPress} style={({pressed}) => [{opacity: pressed ? 0.6 : 1}, styles.removeButton]}>

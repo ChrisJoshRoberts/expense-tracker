@@ -5,12 +5,12 @@ import { colors } from '../../constants/Colors'
 import DropDownInput from './DropDownInput'
 import Button from '../ExpensesOutput/UI/Button'
 
-const ExpenseForm = ({onCancel, submitButtonLabel, onSubmit, title}) => {
+const ExpenseForm = ({onCancel, submitButtonLabel, onSubmit, title, defaultValues}) => {
 const [inputValue, setInputValue] = useState({
-  title: '',
-  amount: '',
-  description: '',
-  category: ''
+  title: defaultValues ? defaultValues.title : '',
+  amount: defaultValues ? defaultValues.amount.toString() : '',
+  description: defaultValues ? defaultValues.description : '',
+  category: defaultValues ? defaultValues.category : ''
 });
 
   const inputChangedHandler = (inputIdentifier, enteredValue) => {

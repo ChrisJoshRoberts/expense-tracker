@@ -14,7 +14,7 @@ const ExpenseItem = ({id, title, description, date, amount, category}) => {
       amount: amount,
       title: title,
       description: description,
-      date: date,
+      date: date.toISOString(),
       category: category
     })
   }

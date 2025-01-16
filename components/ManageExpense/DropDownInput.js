@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { colors } from '../../constants/Colors'
 import { 
@@ -106,13 +106,21 @@ const DropDownInput = ({onSelectItem, valueDropdown}) => {
         , labelStyle: {color: colors.primaryPurple, fontSize: 16, fontWeight: 500}
     },
   ])
+
+  useEffect(() => {
+    setValue(valueDropdown)
+  }, [valueDropdown])
+
   return (
     <DropDownPicker 
       open={open}
       value={value}
       items={items}
       setOpen={setOpen}
-      setValue={setValue}
+      setValue={(selectedValue) => {
+        setValue(selectedValue)
+        onSelectItem(selectedValue)
+      }}
       setItems={setItems}
       onChangeValue={onSelectItem}
       placeholder={'Select Category'}
