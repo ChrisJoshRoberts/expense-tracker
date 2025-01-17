@@ -15,7 +15,7 @@ const IconButtonAdd = ({title}) => {
 
   return (
     <Pressable 
-      onPress={title === 'Add Budget' ?  addBudgetHandler : iconBtnPressHandler }
+      onPress={title === 'Set Budget' ?  addBudgetHandler : iconBtnPressHandler }
       style={({pressed}) => [{opacity: pressed ? 0.6 : 1}]} >
       <View style={styles.button}>
         <Plus size={24} color={'#fff'} strokeWidth={1.2}/>

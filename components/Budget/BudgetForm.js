@@ -1,16 +1,38 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Input from '../ManageExpense/Input'
 import { colors } from '../../constants/Colors'
 import Button from '../ExpensesOutput/UI/Button'
 import { ExpensesContext } from '../../store/expenses-context'
 import { useNavigation } from '@react-navigation/native'
+import { BudgetContext } from '../../store/budget-context'
 
 const BudgetForm = () => {
-  const expensesCtx = useContext(ExpensesContext)
+  const [inputValue, setInputValue] = useState({
+    amount: ''
+  })
+  const budgetCtx = useContext(BudgetContext)
   const navigation = useNavigation()
 
+
   function cancelHandler() {
+      navigation.goBack()
+    }
+
+    const inputChangedHandler = (enteredValue) => {
+      setInputValue((currentInputValues) => {
+        return {
+          ...currentInputValues,
+          amount: enteredValue
+        }
+      })
+    }
+
+    function setBudgetHandler() {
+      const budgetData = {
+        amount: +inputValue.amount
+      }
+      budgetCtx.setBudget(budgetData)
       navigation.goBack()
     }
 
@@ -27,12 +49,12 @@ const BudgetForm = () => {
           textInputConfig={{
           keyboardType: 'decimal-pad',
           plaholder: 'Enter amount',
-          onChangeText: () => {},
+          onChangeText: (enteredValue) => inputChangedHandler(enteredValue),
           }}/>
       </View>
       <View style={styles.buttonContainer}>
         <Button onPress={cancelHandler} mode='flat'>Cancel</Button>
-        <Button onPress={() => {alert('hello')}}>{'Add'}</Button>
+        <Button onPress={setBudgetHandler}>{'Add'}</Button>
       </View>
     </>
   )

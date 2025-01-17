@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 const TrackerCard = ({mode, title, amount}) => {
   const navigation = useNavigation()
   const pressAddHandler = () => {
-    navigation.navigate('AddIncome')
+    navigation.navigate('AddBudget')
   }
   return (
     <View style={styles.trackerCardContainer}>
@@ -17,7 +17,7 @@ const TrackerCard = ({mode, title, amount}) => {
         style={({pressed})=> [styles.plusIcon, {opacity: pressed ? 0.6: 1}]}>
         <View style={styles.innerPlusIcon}>
           <Plus size={16} color={'#fff'}/>
-          <Text style={{color: '#fff', fontWeight: 700, fontSize: 14, paddingRight: 4}}>Add</Text>
+          <Text style={{color: '#fff', fontWeight: 700, fontSize: 14, paddingRight: 4}}>Update</Text>
         </View>
       </Pressable>
       }
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    minWidth: 165,
     backgroundColor: '#fff',
     paddingVertical: 24,
     paddingHorizontal: 18,
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     position: 'absolute',
-    right: '36%',
+    right: '27.5%',
     bottom: -10
   },
   innerPlusIcon: {

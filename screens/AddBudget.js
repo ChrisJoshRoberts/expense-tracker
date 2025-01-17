@@ -1,9 +1,11 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { colors } from '../constants/Colors'
 import BudgetForm from '../components/Budget/BudgetForm'
+import { BudgetContext } from '../store/budget-context'
 
 const AddBudget = () => {
+
   return (
     <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
       <View style={styles.container}>

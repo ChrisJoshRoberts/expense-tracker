@@ -3,13 +3,14 @@ import React, { useContext } from 'react'
 import TrackerCard from './TrackerCard'
 import { ExpensesContext } from '../../store/expenses-context'
 
-const Trackers = () => {
+const Trackers = ({budget}) => {
   const expensesCtx = useContext(ExpensesContext)
-
   const expensesTotal = expensesCtx.expenses.reduce((acc, expense) => { acc += expense.amount; return acc }, 0)
+
+  console.log(parseInt(budget))
   return (
     <View style={styles.container}>
-      <TrackerCard title='Income' amount={30000}/>
+      <TrackerCard title='Budget' amount={budget}/>
       <TrackerCard mode='Expense' title='Expense' amount={expensesTotal}/>
     </View>
   )

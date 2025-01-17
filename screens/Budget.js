@@ -5,17 +5,19 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Trackers from '../components/Budget/Trackers';
 import TransactionList from '../components/Budget/TransactionList';
 import { ExpensesContext } from '../store/expenses-context';
+import { BudgetContext } from '../store/budget-context';
 
 const Budget = () => {
   const expensesCtx = useContext(ExpensesContext)
+  const budgetCtx = useContext(BudgetContext)
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <LinearGradient 
       colors={['#5720ef', '#ead8f800']}
       style={styles.background}
       ></LinearGradient>
-      <ExpensesSummary period={'Monthly Budget'} expenses={expensesCtx.expenses} buttonTitle={'Add Budget'}/>
-      <Trackers />
+      <ExpensesSummary period={'Budget left'} expenses={expensesCtx.expenses} buttonTitle={'Set Budget'}/>
+      <Trackers budget={budgetCtx.budget} />
       {/* 
       TODO ADD Filters Component
       */}
