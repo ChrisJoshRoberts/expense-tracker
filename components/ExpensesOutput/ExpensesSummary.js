@@ -22,7 +22,7 @@ const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
       <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'flex-end'}}>
         <View>
         <Text style={styles.periodTitle}>No Budget set</Text>
-        <Text style={styles.totalAmount}>R0.00</Text>
+        <Text style={[{opacity: 0.3},styles.totalAmount]}>R0.00</Text>
         </View>
         <IconButtonAdd title={buttonTitle} />
       </View>
