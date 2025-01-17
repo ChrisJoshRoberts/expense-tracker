@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import Input from './Input'
 import { colors } from '../../constants/Colors'
@@ -29,6 +29,18 @@ const [inputValue, setInputValue] = useState({
       category: inputValue.category,
       date: new Date()
     }
+    const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
+    const titleIsValid = expenseData.title.trim().length > 0;
+    const descriptionIsValid = expenseData.description.trim().length > 0;
+    const categoryIsValid = expenseData.category.trim().length > 0;
+
+    if (!amountIsValid || !titleIsValid || !descriptionIsValid || !categoryIsValid) {
+      //Show feedback to user
+      Alert.alert('Invalid input', 'Please make sure you have entered a valid title, amount and description', [{text: 'Okay'}])
+
+      return;
+    }
+
     onSubmit(expenseData)
   }
   return (

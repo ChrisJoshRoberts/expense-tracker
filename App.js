@@ -11,7 +11,6 @@ import { HandCoins,  WalletCards, ChartPie } from 'lucide-react-native';
 import ExpensesContextProvider from './store/expenses-context';
 import Budget from './screens/Budget';
 import AddBudget from './screens/AddBudget';
-import AddIncome from './screens/AddIncome';
 import BudgetContextProvider from './store/budget-context';
 
 
