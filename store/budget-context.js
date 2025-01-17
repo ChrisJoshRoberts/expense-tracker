@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 
 
 export const BudgetContext = createContext({
-  budget: 0,
+  budget: null,
   setBudget: ({amount}) => {},
   updateBudget: ({amount}) => {},
 });

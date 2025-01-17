@@ -1,17 +1,19 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { ArrowBigDownDash, Plus } from 'lucide-react-native'
 import { colors } from '../../constants/Colors'
 import { useNavigation } from '@react-navigation/native'
+import { BudgetContext } from '../../store/budget-context'
 
 const TrackerCard = ({mode, title, amount}) => {
+  const budgetCtx = useContext(BudgetContext)
   const navigation = useNavigation()
   const pressAddHandler = () => {
     navigation.navigate('AddBudget')
   }
   return (
     <View style={styles.trackerCardContainer}>
-      {mode !== 'Expense' &&
+      {mode !== 'Expense' && budgetCtx.budget > 0 &&
       <Pressable 
         onPress={pressAddHandler}
         style={({pressed})=> [styles.plusIcon, {opacity: pressed ? 0.6: 1}]}>

@@ -3,7 +3,6 @@ import React, { useContext, useState } from 'react'
 import Input from '../ManageExpense/Input'
 import { colors } from '../../constants/Colors'
 import Button from '../ExpensesOutput/UI/Button'
-import { ExpensesContext } from '../../store/expenses-context'
 import { useNavigation } from '@react-navigation/native'
 import { BudgetContext } from '../../store/budget-context'
 

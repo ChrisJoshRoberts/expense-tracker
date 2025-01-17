@@ -28,10 +28,16 @@ const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
       </View>
     }
     { budget > 0 &&
-      <View style={styles.innerSummary}>
+    <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'flex-end'}}>
+      <View>
         <Text style={styles.periodTitle}>{period}</Text>
         <Text style={styles.totalAmount}>R{totalAmount.toFixed(2)}</Text>
       </View>
+      {
+        period !== 'Budget left' &&
+        <IconButtonAdd title={buttonTitle} />
+      }
+    </View>
     }
   </View>
   )
