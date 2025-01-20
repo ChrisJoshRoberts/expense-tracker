@@ -7,10 +7,22 @@ import Button from '../ExpensesOutput/UI/Button'
 
 const ExpenseForm = ({onCancel, submitButtonLabel, onSubmit, title, defaultValues}) => {
 const [inputValue, setInputValue] = useState({
-  title: defaultValues ? defaultValues.title : '',
-  amount: defaultValues ? defaultValues.amount.toString() : '',
-  description: defaultValues ? defaultValues.description : '',
-  category: defaultValues ? defaultValues.category : ''
+  title: { 
+    value: defaultValues ? defaultValues.title : '', 
+    isValid: defaultValues ? true : false,
+  },
+  amount: {
+    value: defaultValues ? defaultValues.amount.toString() : '', 
+    isValid: defaultValues ? true : false,
+  },
+  description: {
+    value: defaultValues ? defaultValues.description : '',
+    isValid: defaultValues ? true : false,
+  },
+  category: {
+    value: defaultValues ? defaultValues.category : '',
+    isValid: defaultValues ? true : false,
+  }
 });
 
   const inputChangedHandler = (inputIdentifier, enteredValue) => {
