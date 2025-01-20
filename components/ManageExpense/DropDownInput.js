@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { colors } from '../../constants/Colors'
@@ -16,7 +16,7 @@ import {
   PiggyBank, 
   ShieldQuestion } from 'lucide-react-native'
 
-const DropDownInput = ({onSelectItem, valueDropdown}) => {
+const DropDownInput = ({onSelectItem, valueDropdown, isValid}) => {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState(null)
   const [items, setItems] = useState([
@@ -112,39 +112,55 @@ const DropDownInput = ({onSelectItem, valueDropdown}) => {
   }, [valueDropdown])
 
   return (
-    <DropDownPicker 
-      open={open}
-      value={value}
-      items={items}
-      setOpen={setOpen}
-      setValue={(selectedValue) => {
-        setValue(selectedValue)
-        onSelectItem(selectedValue)
-      }}
-      setItems={setItems}
-      onChangeValue={onSelectItem}
-      placeholder={'Select Category'}
-      style={styles.dropdown}
-      textStyle={styles.dropdownText}
-      placeholderStyle={{color: colors.baseDark, opacity: 0.3}}
-      arrowIconStyle={{tintColor: colors.primaryPurple,}}
-      dropDownContainerStyle={{borderRadius: 12, borderWidth: 0, backgroundColor: colors.offWhite}}
-    />
+    <>
+      <Text style={[styles.label, isValid && styles.labelError]}>Category</Text>
+      <DropDownPicker 
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={(selectedValue) => {
+          setValue(selectedValue)
+          onSelectItem(selectedValue)
+        }}
+        setItems={setItems}
+        onChangeValue={onSelectItem}
+        placeholder={'Select Category'}
+        style={[styles.dropdown, isValid && styles.dropdownInvalid]}
+        textStyle={styles.dropdownText}
+        placeholderStyle={{color: colors.baseDark, opacity: 0.3}}
+        arrowIconStyle={{tintColor: colors.primaryPurple,}}
+        dropDownContainerStyle={{borderRadius: 12, borderWidth: 0, backgroundColor: colors.offWhite}}
+      />
+    </>
   )
 }
 
 export default DropDownInput
 
 const styles = StyleSheet.create({
+  label: {
+    fontSize: 12,
+    fontWeight: 700,
+    marginBottom: 4,
+    color: colors.primaryPurple
+  },
+  labelError : {
+    color: colors.error
+  },  
   dropdown: {
     backgroundColor: colors.offWhite,
     borderRadius: 12,
     borderWidth: 0,
     marginBottom: 18,
   },
+  dropdownInvalid: {
+    borderColor: colors.error,
+    borderWidth: 1
+  },
   dropdownText: {
     fontSize: 16,
     fontWeight: 500,
     color: colors.baseDark
-  }
+  },
 })

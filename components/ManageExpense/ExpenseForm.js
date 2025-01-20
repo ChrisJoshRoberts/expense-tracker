@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import Input from './Input'
 import { colors } from '../../constants/Colors'
@@ -6,39 +6,39 @@ import DropDownInput from './DropDownInput'
 import Button from '../ExpensesOutput/UI/Button'
 
 const ExpenseForm = ({onCancel, submitButtonLabel, onSubmit, title, defaultValues}) => {
-const [inputValue, setInputValue] = useState({
+const [inputs, setInputs] = useState({
   title: { 
     value: defaultValues ? defaultValues.title : '', 
-    isValid: defaultValues ? true : false,
+    isValid: true,
   },
   amount: {
     value: defaultValues ? defaultValues.amount.toString() : '', 
-    isValid: defaultValues ? true : false,
+    isValid: true,
   },
   description: {
     value: defaultValues ? defaultValues.description : '',
-    isValid: defaultValues ? true : false,
+    isValid: true,
   },
   category: {
     value: defaultValues ? defaultValues.category : '',
-    isValid: defaultValues ? true : false,
+    isValid: true,
   }
 });
 
   const inputChangedHandler = (inputIdentifier, enteredValue) => {
-    setInputValue((currentInputValues) => {
+    setInputs((currentInputs) => {
       return {
-        ...currentInputValues,
-        [inputIdentifier]: enteredValue
+        ...currentInputs,
+        [inputIdentifier]: {value: enteredValue, isValid: true},
       }
     })
   }
   const submitHandler = () => {
     const expenseData = {
-      amount: +inputValue.amount,
-      title: inputValue.title,
-      description: inputValue.description,
-      category: inputValue.category,
+      amount: +inputs.amount.value,
+      title: inputs.title.value,
+      description: inputs.description.value,
+      category: inputs.category.value,
       date: new Date()
     }
     const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
@@ -48,13 +48,22 @@ const [inputValue, setInputValue] = useState({
 
     if (!amountIsValid || !titleIsValid || !descriptionIsValid || !categoryIsValid) {
       //Show feedback to user
-      Alert.alert('Invalid input', 'Please make sure you have entered a valid title, amount and description', [{text: 'Okay'}])
-
+      setInputs((currentInputs) => {
+        return {
+          title: {value: currentInputs.title.value, isValid: titleIsValid},
+          amount: {value: currentInputs.amount.value, isValid: amountIsValid},
+          description: {value: currentInputs.description.value, isValid: descriptionIsValid},
+          category: {value: currentInputs.category.value, isValid: categoryIsValid},
+        }
+      })
       return;
     }
 
     onSubmit(expenseData)
   }
+
+  const formIsInvalid = !inputs.title.isValid || !inputs.amount.isValid || !inputs.description.isValid || !inputs.category.isValid
+
   return (
     <View style={{flex: 1}}>
       <Text style={styles.expenseTitle}>{title}</Text>
@@ -62,28 +71,35 @@ const [inputValue, setInputValue] = useState({
         textInputConfig={{
           placeholder: 'Enter title',
           onChangeText: inputChangedHandler.bind(this, 'title'),
-          value: inputValue.title
+          value: inputs.title.value, 
         }}
+        isValid={!inputs.title.isValid}
       />
       <Input 
         label={'Amount'} 
+        isValid={!inputs.amount.isValid}
         textInputConfig={{
           keyboardType: 'decimal-pad',
           placeholder: 'Enter amount',
           onChangeText: inputChangedHandler.bind(this, 'amount'),
-          value: inputValue.amount
+          value: inputs.amount.value,
+          
         }}/>
-      <Text style={styles.label}>Category</Text>
       <DropDownInput 
         onSelectItem={inputChangedHandler.bind(this, 'category')} 
-        valueDropdown={inputValue.category}
+        valueDropdown={inputs.category.value}
+        isValid={!inputs.category.isValid}
       />
-      <Input label={'Description'} textInputConfig={{
+      <Input 
+        label={'Description'}
+        isValid={!inputs.description.isValid} 
+        textInputConfig={{
         placeholder: 'Enter description',
         onChangeText: inputChangedHandler.bind(this, 'description'),
-        value: inputValue.description,
+        value: inputs.description.value,
         multiline: true,
       }} />
+      {formIsInvalid && <Text style={styles.errorText}>Error submitting your new expense!</Text>}
         <View style={styles.buttonContainer}>
           <Button onPress={onCancel} mode='flat'>Cancel</Button>
           <Button onPress={submitHandler}>{submitButtonLabel}</Button>
@@ -95,12 +111,6 @@ const [inputValue, setInputValue] = useState({
 export default ExpenseForm
 
 const styles = StyleSheet.create({
-    label: {
-      fontSize: 12,
-      fontWeight: 700,
-      marginBottom: 4,
-      color: colors.primaryPurple
-    },
     expenseTitle : {
       fontSize: 18,
       fontWeight: 700,
@@ -114,5 +124,12 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       width: '100%'
     },
-
+    errorText: {
+      color: colors.error,
+      fontSize: 12,
+      fontWeight: 700,
+      textAlign: 'center',
+      position: 'absolute',
+      bottom: 100,
+    }
 })
