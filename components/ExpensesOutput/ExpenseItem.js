@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     },
     exDesctiotion: {
       fontSize: 14,
-      color: colors.darkGrey
+      color: colors.darkGrey,
+      maxWidth: 180
     }
 })

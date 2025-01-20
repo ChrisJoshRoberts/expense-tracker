@@ -64,6 +64,25 @@ const [inputs, setInputs] = useState({
 
   const formIsInvalid = !inputs.title.isValid || !inputs.amount.isValid || !inputs.description.isValid || !inputs.category.isValid
 
+  let errorText = ''
+
+  const findInvalidInput = () => {
+    if (!inputs.title.isValid) {
+      return errorText = 'title'
+    }
+    if (!inputs.amount.isValid) {
+      return errorText = 'amount'
+    }
+    if (!inputs.description.isValid) {
+      return errorText = 'description'
+    }
+    if (!inputs.category.isValid) {
+      return errorText = 'category'
+    }
+  }
+
+  findInvalidInput()
+
   return (
     <View style={{flex: 1}}>
       <Text style={styles.expenseTitle}>{title}</Text>
@@ -98,8 +117,10 @@ const [inputs, setInputs] = useState({
         onChangeText: inputChangedHandler.bind(this, 'description'),
         value: inputs.description.value,
         multiline: true,
+        maxLength: 50,
       }} />
-      {formIsInvalid && <Text style={styles.errorText}>Error submitting your new expense!</Text>}
+      <Text style={styles.helperText}>{`(Max 50 characters)`}</Text>
+      {formIsInvalid && <Text style={styles.errorText}>{`Please enter a valid ${errorText}.`}</Text>}
         <View style={styles.buttonContainer}>
           <Button onPress={onCancel} mode='flat'>Cancel</Button>
           <Button onPress={submitHandler}>{submitButtonLabel}</Button>
@@ -116,6 +137,13 @@ const styles = StyleSheet.create({
       fontWeight: 700,
       color: colors.baseDark,
       marginBottom: 16
+    },
+    helperText: {
+      fontSize: 12,
+      color: colors.grey,
+      position: 'absolute',
+      bottom: 125
+
     },
     buttonContainer: {
       position: 'absolute',

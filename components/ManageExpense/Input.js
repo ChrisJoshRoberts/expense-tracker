@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offWhite
   }, 
   multiLine: {
-    minHeight: 100,
+    minHeight: 80,
     textAlignVertical: 'top',
     fontSize: 16,
     fontWeight: 400
