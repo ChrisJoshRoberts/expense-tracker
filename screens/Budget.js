@@ -8,7 +8,7 @@ import { ExpensesContext } from '../store/expenses-context';
 import { BudgetContext } from '../store/budget-context';
 
 const Budget = () => {
-  const [isfetching, setIsfetching] = useState(true)
+ 
   const expensesCtx = useContext(ExpensesContext)
   const budgetCtx = useContext(BudgetContext)
   return (
