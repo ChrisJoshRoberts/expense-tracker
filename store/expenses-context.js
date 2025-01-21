@@ -1,100 +1,9 @@
 import { createContext, useReducer } from "react"
 
-const dummyExpenses = [
-  {
-    id: '1',
-    title: 'Groceries',
-    description: 'buying daily groceries',
-    amount: 94.12,
-    date: new Date(2025, 1, 10),
-    category: 'Food'
-  },
-  {
-    id: '2',
-    title: 'Rent',
-    description: 'monthly rent',
-    amount: 800.0,
-    date: new Date(2021, 6, 1),
-    category: 'Rent'
-  },
-  {
-    id: '3',
-    title: 'Insurance',
-    description: 'monthly insurance',
-    amount: 294.67,
-    date: new Date(2021, 5, 20),
-    category: 'Insurance'
-  },
-  {
-    id: '4',
-    title: 'Internet',
-    description: 'monthly internet',
-    amount: 45.0,
-    date: new Date(2021, 6, 16),
-    category: 'Internet'
-  },
-  {
-    id: '5',
-    title: 'Electricity',
-    description: 'monthly electricity',
-    amount: 150.0,
-    date: new Date(2021, 6, 10),
-    category: 'Utilities'
-  },
-  {
-    id: '6',
-    title: 'Water',
-    description: 'monthly water',
-    amount: 100.0,
-    date: new Date(2021, 6, 5),
-    category: 'Utilities'
-  },
-  {
-    id: '7',
-    title: 'Car Payment',
-    description: 'monthly car payment',
-    amount: 350.0,
-    date: new Date(2021, 6, 3),
-    category: 'Transport'
-  },
-  {
-    id: '8',
-    title: 'Fuel',
-    description: 'monthly fuel',
-    amount: 200.0,
-    date: new Date(2021, 6, 2),
-    category: 'Transport'
-  },
-  {
-    id: '9',
-    title: 'Entertainment',
-    description: 'monthly entertainment',
-    amount: 100.0,
-    date: new Date(2021, 6, 1),
-    category: 'Entertainment'
-  },
-  {
-    id: '10',
-    title: 'Phone',
-    description: 'monthly phone bill',
-    amount: 50.0,
-    date: new Date(2021, 6, 1),
-    category: 'Phone'
-  },
-  {
-    id: '11',
-    title: 'Gym',
-    description: 'monthly gym membership',
-    amount: 50.0,
-    date: new Date(2021, 6, 1),
-    category: 'Other'
-  }
-
-]
-
 export const ExpensesContext = createContext({
   expenses: [],
   addExpense: ({description, amount, title, date}) => {},
+  setExpense: (expenses) => {},
   deleteExpense: (id) => {},
   updateExpense: (id, {description, amount, title, date}) => {},
 })
@@ -104,6 +13,8 @@ function expenseReducer(state, action) {
     case 'ADD' :
       const id = new Date().toString() + Math.random().toString()
       return [{...action.payload, id: id}, ...state]
+    case 'SET':
+      return action.payload
     case 'UPDATE': 
       const updateableExpenseIndex = state.findIndex((expense) => expense.id === action.payload.id)
       const updatableExpense = state[updateableExpenseIndex]
@@ -119,9 +30,12 @@ function expenseReducer(state, action) {
 }
 
 function ExpensesContextProvider({children}) {
-  const [expenseState, dispatch] = useReducer(expenseReducer, dummyExpenses)
+  const [expenseState, dispatch] = useReducer(expenseReducer, [])
   function addExpense(expenseData) {
     dispatch({type: 'ADD', payload: expenseData})
+  }
+  function setExpense(expenses) {
+    dispatch({type: 'SET', payload: expenses})
   }
   function deleteExpense(id) {
     dispatch({type: 'DELETE', payload: id})
@@ -132,6 +46,7 @@ function ExpensesContextProvider({children}) {
   const value = {
     expenses: expenseState,
     addExpense: addExpense,
+    setExpense: setExpense,
     deleteExpense: deleteExpense,
     updateExpense: updateExpense
   }
