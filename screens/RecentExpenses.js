@@ -1,21 +1,31 @@
 import { SafeAreaView, StyleSheet} from 'react-native'
-import React, { useContext, useEffect} from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput'
 import { colors } from '../constants/Colors'
 import { ExpensesContext } from '../store/expenses-context'
 import { getDateMinusDays } from '../util/date'
 import { getExpenses } from '../util/http'
+import LoadingOverlay from '../components/ExpensesOutput/UI/LoadingOverlay'
 
 const RecentExpenses = () => {
+  const [isFetching, setIsFetching] = useState(true)
   const expensesCtx = useContext(ExpensesContext)
 
   useEffect(() => {
     async function fetchExpenses() {
+      setIsFetching(true)
       const expenses = await getExpenses()
+      setIsFetching(false)
       expensesCtx.setExpense(expenses)
     }
     fetchExpenses()
   }, [])
+
+  if (isFetching) {
+    return (
+      <LoadingOverlay />
+    )
+  }
 
   const recentExpenses = expensesCtx.expenses.filter((expense) => {
     const today = new Date()

@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import ExpensesSummary from '../components/ExpensesOutput/ExpensesSummary'
 import { LinearGradient } from 'expo-linear-gradient';
 import Trackers from '../components/Budget/Trackers';
@@ -8,6 +8,7 @@ import { ExpensesContext } from '../store/expenses-context';
 import { BudgetContext } from '../store/budget-context';
 
 const Budget = () => {
+  const [isfetching, setIsfetching] = useState(true)
   const expensesCtx = useContext(ExpensesContext)
   const budgetCtx = useContext(BudgetContext)
   return (

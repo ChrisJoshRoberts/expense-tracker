@@ -6,6 +6,7 @@ import { ExpensesContext } from '../store/expenses-context'
 import ExpenseForm from '../components/ManageExpense/ExpenseForm'
 import Button from '../components/ExpensesOutput/UI/Button'
 import { deleteExpense, storeExpense, updateExpense } from '../util/http'
+import LoadingOverlay from '../components/ExpensesOutput/UI/LoadingOverlay'
 
 
 const ManageExpense = ({route, navigation}) => {
@@ -13,10 +14,12 @@ const ManageExpense = ({route, navigation}) => {
   const editExpenseId = route.params?.expenseId
   const isEditing = !!editExpenseId
   const [isEditingForm, setIsEditingForm] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const selectedExpense = expensesCtx.expenses.find(expense => expense.id === editExpenseId)
 
   async function deleteHandler() {
+    setIsSubmitting(true)
     expensesCtx.deleteExpense(editExpenseId)
     await deleteExpense(editExpenseId)
     navigation.goBack()
@@ -26,6 +29,7 @@ const ManageExpense = ({route, navigation}) => {
     navigation.goBack()
   }
   async function confirmHandler(expenseData) {
+    setIsSubmitting(true)
     try {
       if (isEditing) {
         expensesCtx.updateExpense(editExpenseId, expenseData);
@@ -49,6 +53,12 @@ const ManageExpense = ({route, navigation}) => {
     amount: route.params?.amount,
     date: route.params?.date,
     description: route.params?.description,
+  }
+
+  if (isSubmitting) {
+    return (
+      <LoadingOverlay />
+    )
   }
 
   return (
