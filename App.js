@@ -12,6 +12,9 @@ import ExpensesContextProvider from './store/expenses-context';
 import Budget from './screens/Budget';
 import AddBudget from './screens/AddBudget';
 import BudgetContextProvider from './store/budget-context';
+import LoginScreen from './screens/Auth/LoginScreen';
+import SignUpScreen from './screens/Auth/SignUpScreen';
+import OnboardingScreen from './screens/Onboarding/OnboardingScreen';
 
 
 const Stack = createNativeStackNavigator()
@@ -51,8 +54,27 @@ function ExpensesOverview() {
     </Tab.Navigator>
   )
 }
+function OnboardingStack() {
+  return (
+    <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+  )
+}
+function AuthStack() {
+  return (
+    <>
+      <StatusBar style="light" />
+      <Stack.Navigator screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+      </Stack.Navigator>
+    </>
+  )
+}
 
-export default function App() {
+function AuthenticatedStack() {
   return (
     <>
     <StatusBar style="light" />
@@ -80,6 +102,13 @@ export default function App() {
         </ExpensesContextProvider>
       </BudgetContextProvider>
     </>
+  )
+}
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AuthStack />
+    </NavigationContainer>
   );
 }
 

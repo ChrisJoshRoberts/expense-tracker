@@ -6,6 +6,7 @@ const LoadingOverlay = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color={colors.primaryPurple} />
+      <Text style={styles.text}>{'Loading...'}</Text>
     </View>
   )
 }
@@ -18,5 +19,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffffff8c'
+  }, 
+  text: {
+    fontSize: 16,
+    fontWeight: 700,
+    color: colors.primaryPurple,
+    marginTop: 16
   }
 })
