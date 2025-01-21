@@ -5,7 +5,7 @@ import EditExpenseCard from '../components/EditExpenseCard'
 import { ExpensesContext } from '../store/expenses-context'
 import ExpenseForm from '../components/ManageExpense/ExpenseForm'
 import Button from '../components/ExpensesOutput/UI/Button'
-import { storeExpense } from '../util/http'
+import { deleteExpense, storeExpense, updateExpense } from '../util/http'
 
 
 const ManageExpense = ({route, navigation}) => {
@@ -16,8 +16,9 @@ const ManageExpense = ({route, navigation}) => {
 
   const selectedExpense = expensesCtx.expenses.find(expense => expense.id === editExpenseId)
 
-  function deleteHandler() {
+  async function deleteHandler() {
     expensesCtx.deleteExpense(editExpenseId)
+    await deleteExpense(editExpenseId)
     navigation.goBack()
   }
 
@@ -28,9 +29,10 @@ const ManageExpense = ({route, navigation}) => {
     try {
       if (isEditing) {
         expensesCtx.updateExpense(editExpenseId, expenseData);
+        await updateExpense(editExpenseId, expenseData)
       } else {
-        await storeExpense(expenseData);
-        expensesCtx.addExpense(expenseData);
+        const id = await storeExpense(expenseData);
+        expensesCtx.addExpense({...expenseData, id: id});
       }
       navigation.goBack();
     } catch (error) {

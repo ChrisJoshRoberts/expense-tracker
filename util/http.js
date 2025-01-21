@@ -8,8 +8,9 @@ export async function storeExpense(expenseData) {
       BASE_URL + "/expenses.json",
       expenseData
     );
+    const id = response.data.name
     console.log("Data stored successfully:", response.data);
-    return response.data;
+    return id;
   } catch (error) {
     console.error("Error storing data:", error.response ? error.response.data : error.message);
     throw error; // Re-throw the error so the calling code can handle it
@@ -33,4 +34,12 @@ export async function getExpenses() {
     expenses.push(expenseObj);
   }
   return expenses;
+}
+
+export function updateExpense(id, expenseData ) {
+  return axios.put(BASE_URL + `/expenses/${id}.json`, expenseData);
+}
+
+export function deleteExpense(id) {
+  return axios.delete(BASE_URL + `/expenses/${id}.json`)
 }

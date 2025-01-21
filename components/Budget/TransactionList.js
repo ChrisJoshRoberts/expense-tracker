@@ -1,14 +1,23 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import PillButton from '../ExpensesOutput/UI/PillButton'
 import { useNavigation } from '@react-navigation/native'
 import { colors } from '../../constants/Colors'
 import ExpensesList from '../ExpensesOutput/ExpensesList'
 import { ExpensesContext } from '../../store/expenses-context'
+import { getExpenses } from '../../util/http'
 
 const TransactionList = () => {
   const navigation = useNavigation()
   const expensesCtx = useContext(ExpensesContext)
+
+  useEffect(() => {
+    async function fetchExpenses() {
+      const expenses = await getExpenses()
+      expensesCtx.setExpense(expenses)
+    }
+    fetchExpenses()
+  },[])
 
   const pressHandler = () => {
     navigation.navigate('RecentExpenses')
