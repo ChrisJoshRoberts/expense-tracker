@@ -1,14 +1,24 @@
 import { SafeAreaView, StyleSheet} from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput'
 import { colors } from '../constants/Colors'
 import { ExpensesContext } from '../store/expenses-context'
 import { getDateMinusDays } from '../util/date'
+import { getExpenses } from '../util/http'
 
 const RecentExpenses = () => {
-  const expensesCtx = useContext(ExpensesContext)
+  // const expensesCtx = useContext(ExpensesContext)
+  const [fetchedExpenses, setFetchedExpenses] = useState([])
 
-  const recentExpenses = expensesCtx.expenses.filter((expense) => {
+  useEffect(() => {
+    async function fetchExpenses() {
+      const expenses = await getExpenses()
+      setFetchedExpenses(expenses)
+    }
+    fetchExpenses()
+  }, [])
+
+  const recentExpenses = fetchedExpenses.filter((expense) => {
     const today = new Date()
     const date7daysAgo = getDateMinusDays(today, 7)
     return expense.date >= date7daysAgo
