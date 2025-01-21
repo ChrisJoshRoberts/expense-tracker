@@ -29,7 +29,7 @@ const [inputs, setInputs] = useState({
     setInputs((currentInputs) => {
       return {
         ...currentInputs,
-        [inputIdentifier]: {value: enteredValue, isValid: true},
+        [inputIdentifier]: {value: enteredValue || '', isValid: true},
       }
     })
   }
@@ -39,12 +39,14 @@ const [inputs, setInputs] = useState({
       title: inputs.title.value,
       description: inputs.description.value,
       category: inputs.category.value,
-      date: new Date()
+      date: new Date(),
     }
+    console.log(expenseData)
     const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
     const titleIsValid = expenseData.title.trim().length > 0;
     const descriptionIsValid = expenseData.description.trim().length > 0;
-    const categoryIsValid = expenseData.category.trim().length > 0;
+    const categoryIsValid = typeof expenseData.category === 'string' && expenseData.category.trim().length > 0;
+
 
     if (!amountIsValid || !titleIsValid || !descriptionIsValid || !categoryIsValid) {
       //Show feedback to user

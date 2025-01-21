@@ -24,14 +24,20 @@ const ManageExpense = ({route, navigation}) => {
   function cancelHandler() {
     navigation.goBack()
   }
-  function confirmHandler(expenseData) {
-    if (isEditing) {
-      expensesCtx.updateExpense(editExpenseId, expenseData)
-    } else {
-      storeExpense(expenseData)
-      expensesCtx.addExpense(expenseData)
+  async function confirmHandler(expenseData) {
+    try {
+      if (isEditing) {
+        expensesCtx.updateExpense(editExpenseId, expenseData);
+      } else {
+        await storeExpense(expenseData);
+        expensesCtx.addExpense(expenseData);
+      }
+      navigation.goBack();
+    } catch (error) {
+      // Handle the error appropriately
+      console.error('Failed to save expense:', error);
+      // You might want to show an error message to the user here
     }
-    navigation.goBack()
   }
   function editHandler () {
     setIsEditingForm(true)

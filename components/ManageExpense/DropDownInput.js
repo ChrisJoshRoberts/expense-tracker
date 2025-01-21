@@ -111,6 +111,12 @@ const DropDownInput = ({onSelectItem, valueDropdown, isValid}) => {
     setValue(valueDropdown)
   }, [valueDropdown])
 
+  const handleChangeValue = (valueDropdown) => {
+    setValue(valueDropdown)
+    onSelectItem(valueDropdown)
+    
+  }
+
   return (
     <>
       <Text style={[styles.label, isValid && styles.labelError]}>Category</Text>
@@ -119,10 +125,7 @@ const DropDownInput = ({onSelectItem, valueDropdown, isValid}) => {
         value={value}
         items={items}
         setOpen={setOpen}
-        setValue={(selectedValue) => {
-          setValue(selectedValue)
-          onSelectItem(selectedValue)
-        }}
+        setValue={handleChangeValue}
         setItems={setItems}
         onChangeValue={onSelectItem}
         placeholder={'Select Category'}
