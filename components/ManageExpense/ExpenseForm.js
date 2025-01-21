@@ -67,6 +67,9 @@ const [inputs, setInputs] = useState({
   let errorText = ''
 
   const findInvalidInput = () => {
+    if (!inputs.title.isValid && !inputs.amount.isValid && !inputs.description.isValid && !inputs.category.isValid) {
+      return errorText = 'title, amount, description, and category'
+    }
     if (!inputs.title.isValid) {
       return errorText = 'title'
     }
@@ -143,7 +146,6 @@ const styles = StyleSheet.create({
       color: colors.grey,
       position: 'absolute',
       bottom: 125
-
     },
     buttonContainer: {
       position: 'absolute',

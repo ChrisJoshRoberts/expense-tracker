@@ -7,7 +7,7 @@ const Trackers = ({budget}) => {
   const expensesCtx = useContext(ExpensesContext)
   const expensesTotal = expensesCtx.expenses.reduce((acc, expense) => { acc += expense.amount; return acc }, 0)
 
-  console.log(parseInt(budget))
+
   return (
     <View style={styles.container}>
       <TrackerCard title='Budget' amount={budget}/>
