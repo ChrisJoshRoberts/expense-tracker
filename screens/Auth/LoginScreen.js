@@ -9,7 +9,7 @@ const LoginScreen = () => {
   return (
     <LinearGradient
             colors={['#DEE0E1', '#d0bdd8c9','#a0bececa', '#DEE0E1']}
-            locations={[0., 0.5, 0.7, 1]}
+            locations={[1, 0.2, 0.5, 1]}
             style={styles.gradientBackground}
           >
       <SafeAreaView style={styles.container}>
