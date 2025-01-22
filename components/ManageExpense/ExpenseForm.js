@@ -97,6 +97,7 @@ const [inputs, setInputs] = useState({
             placeholder: 'Enter title',
             onChangeText: inputChangedHandler.bind(this, 'title'),
             value: inputs.title.value, 
+            returnKeyType: 'next',
           }}
           isValid={!inputs.title.isValid}
         />
@@ -105,6 +106,7 @@ const [inputs, setInputs] = useState({
           isValid={!inputs.amount.isValid}
           textInputConfig={{
             keyboardType: 'decimal-pad',
+            returnKeyType: 'done',
             placeholder: 'Enter amount',
             onChangeText: inputChangedHandler.bind(this, 'amount'),
             value: inputs.amount.value,
@@ -124,6 +126,7 @@ const [inputs, setInputs] = useState({
           value: inputs.description.value,
           multiline: true,
           maxLength: 50,
+          returnKeyType: 'done',
         }} />
         <Text style={styles.helperText}>{`(Max 50 characters)`}</Text>
         {formIsInvalid && <Text style={styles.errorText}>{`Please enter a valid ${errorText}.`}</Text>}
