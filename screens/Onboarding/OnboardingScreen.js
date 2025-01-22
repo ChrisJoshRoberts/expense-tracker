@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Swiper from 'react-native-swiper'
 import { onboarding } from '../../constants'
 import Button from '../../components/ExpensesOutput/UI/Button'
+import { colors } from '../../constants/Colors'
 
 
 const OnboardingScreen = ({navigation}) => {
@@ -25,7 +26,7 @@ const OnboardingScreen = ({navigation}) => {
         <Swiper
           loop={false}
           dotStyle={{ backgroundColor: '#ffffff8c', borderColor: '#ffffff8c', borderWidth: 1 }}
-          activeDotStyle={{ backgroundColor: '#ffffff', borderColor: '#ffffff', borderWidth: 1 }}
+          activeDotStyle={{ backgroundColor: colors.primaryPurple, borderColor: colors.primaryPurple, borderWidth: 1 }}
           paginationStyle={{ bottom: 16 }}
           onIndexChanged={(index) => setActiveIndex(index)}
         >
@@ -39,7 +40,7 @@ const OnboardingScreen = ({navigation}) => {
               </View>
             ))}
           </Swiper>
-          {islastSlide && <Button>Let's Go</Button>}
+          {islastSlide && <Button onPress={() => navigation.navigate('Login')}>Let's Go</Button>}
       </SafeAreaView>
     </LinearGradient>
   )

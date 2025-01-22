@@ -3,9 +3,9 @@ import React from 'react'
 
 const LoginScreen = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>LoginScreen</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 
