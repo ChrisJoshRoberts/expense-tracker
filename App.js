@@ -56,13 +56,15 @@ function ExpensesOverview() {
 }
 function OnboardingStack() {
   return (
-    <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+    <>
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+    </>
   )
 }
 function AuthStack() {
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <Stack.Navigator screenOptions={{
         headerShown: false
       }}>
