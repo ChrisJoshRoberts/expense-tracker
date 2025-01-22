@@ -1,11 +1,14 @@
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import Swiper from 'react-native-swiper'
 import { onboarding } from '../../constants'
+import Button from '../../components/ExpensesOutput/UI/Button'
 
 
-const OnboardingScreen = () => {
+const OnboardingScreen = ({navigation}) => {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const islastSlide = activeIndex === onboarding.length - 1
   return (
     <LinearGradient
       colors={['#DEE0E1', '#d0bdd8c9','#a0bececa', '#DEE0E1']}
@@ -13,23 +16,30 @@ const OnboardingScreen = () => {
       style={styles.gradientBackground}
     >
       <SafeAreaView style={styles.container}>
-        <TouchableOpacity style={styles.skip}>
+        <TouchableOpacity 
+          style={styles.skip}
+          onPress={() => navigation.navigate('Login')}
+        >
           <Text style={styles.skipText}>Skip</Text>
         </TouchableOpacity>
         <Swiper
           loop={false}
           dotStyle={{ backgroundColor: '#ffffff8c', borderColor: '#ffffff8c', borderWidth: 1 }}
           activeDotStyle={{ backgroundColor: '#ffffff', borderColor: '#ffffff', borderWidth: 1 }}
-          paginationStyle={{ bottom: 16 }}>
+          paginationStyle={{ bottom: 16 }}
+          onIndexChanged={(index) => setActiveIndex(index)}
+        >
             {onboarding.map((item, index) => (
               <View
+                key={index}
                 style={styles.swiperContainer}
-                key={item.key}
               >
                 <Text style={styles.swiperText}>{item.title}</Text>
+                <Text style={styles.swiperDescription}>{item.description}</Text>
               </View>
             ))}
           </Swiper>
+          {islastSlide && <Button>Let's Go</Button>}
       </SafeAreaView>
     </LinearGradient>
   )
@@ -41,7 +51,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: 16
   },
   gradientBackground: {
     flex: 1,
@@ -72,7 +83,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     fontWeight: '700',
-    color: '#fff',
+    color: '#211d4ed1',
     width: '80%',
+  },
+  swiperDescription: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#09003268',
+    width: '80%',
+    paddingTop: 16
   }
 })

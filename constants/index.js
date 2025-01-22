@@ -1,7 +1,7 @@
 export const onboarding = [
   {
     id: 1,
-    title: 'Welcome to the Expense Tracker App',
+    title: 'Welcome to the Moxie App',
     description: 'This app will help you keep track of your expenses and budget.',
   },
   {

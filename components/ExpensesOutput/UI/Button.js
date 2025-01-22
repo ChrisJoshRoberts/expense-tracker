@@ -16,10 +16,10 @@ export default Button
 const styles = StyleSheet.create({
   button: {
     padding: 16,
-    backgroundColor: colors.primaryPurple,
-    borderRadius: 10,
+    backgroundColor: '#ffffffcb',
+    borderRadius: 50,
     alignItems: 'center',
-    width: '90%',
+    width: '60%',
     margin: 4
   },
   buttonFlat: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     padding: 8, 
   },
   buttonText: {
-    color: '#fff',
+    color: '#211d4ed1',
     fontWeight: 700,
     fontSize: 16
   },
