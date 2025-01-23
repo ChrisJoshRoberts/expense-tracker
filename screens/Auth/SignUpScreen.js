@@ -1,8 +1,9 @@
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import AuthContent from '../../components/Auth/AuthContent'
 import { colors } from '../../constants/Colors'
+import logo from '../../assets/onboarding/logo.png'
 
 const SignUpScreen = ({navigation}) => {
   return (
@@ -13,6 +14,7 @@ const SignUpScreen = ({navigation}) => {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.authCard}>
+          <Image source={logo} resizeMode='contain' style={{ width: 80,height: 50}} />
           <AuthContent />
         </View>
         <View style={styles.helperTextContainer}>
