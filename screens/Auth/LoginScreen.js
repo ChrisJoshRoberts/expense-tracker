@@ -1,6 +1,7 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
+import logo from '../../assets/onboarding/logo.png'
 
 import AuthContent from '../../components/Auth/AuthContent'
 import Button from '../../components/ExpensesOutput/UI/Button'
@@ -15,9 +16,8 @@ const LoginScreen = () => {
           >
       <SafeAreaView style={styles.container}>
         <View style={styles.authCard}>
-          <Text style={{paddingVertical: 16}}>{'Login'}</Text>
-          <AuthContent />
-          <Button></Button>
+          <Image source={logo} resizeMode='contain' style={{ width: 120 }} />
+          <AuthContent isLogin />
         </View>
       </SafeAreaView>
     </LinearGradient>

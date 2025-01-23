@@ -121,6 +121,7 @@ const DropDownInput = ({onSelectItem, valueDropdown, isValid}) => {
     <>
       <Text style={[styles.label, isValid && styles.labelError]}>Category</Text>
       <DropDownPicker 
+        searchable={true}
         open={open}
         value={value}
         items={items}

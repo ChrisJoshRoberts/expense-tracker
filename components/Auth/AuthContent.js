@@ -2,10 +2,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import AuthForm from './AuthForm'
 
-const AuthContent = () => {
+const AuthContent = ({isLogin}) => {
   return (
     <View>
-      <AuthForm />
+      <AuthForm 
+        isLogin={isLogin}
+      />
     </View>
   )
 }
