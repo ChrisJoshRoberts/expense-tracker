@@ -14,13 +14,15 @@ const LoginScreen = ({navigation}) => {
           >
       <SafeAreaView style={styles.container}>
         <View style={styles.authCard}>
-          <Image source={logo} resizeMode='contain' style={{ width: 80,height: 50}} />
+          <View style={{width: '100%', alignItems: 'center'}}>
+            <Image source={logo} resizeMode='contain' style={{ width: 80,height: 50}} />
+          </View>
           <AuthContent isLogin />
         </View>
         <View style={styles.helperTextContainer}>
           <Text style={styles.helperText}>Don't have an account?</Text>
           <TouchableOpacity
-            onPress={() => navigation.navigate('SignUp')}
+            onPress={() => navigation.replace('SignUp')}
           >
             <Text style={styles.linkText}>Sign up</Text>
           </TouchableOpacity>

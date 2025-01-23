@@ -54,23 +54,25 @@ function ExpensesOverview() {
     </Tab.Navigator>
   )
 }
-function OnboardingStack() {
-  return (
-    <>
-      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-    </>
-  )
-}
+
 function AuthStack() {
   return (
     <>
       <StatusBar style="dark" />
       <Stack.Navigator initialRouteName='Login' screenOptions={{
-        headerShown: false
+        headerShown: false,
       }}>
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="Login" component={LoginScreen}
+          options={{
+            animation: 'fade'
+          }}
+        />
+        <Stack.Screen name="SignUp" component={SignUpScreen} 
+          options={{
+            animation: 'fade'
+          }}
+        />
       </Stack.Navigator>
     </>
   )
