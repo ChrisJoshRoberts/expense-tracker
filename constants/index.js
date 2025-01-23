@@ -1,4 +1,6 @@
 import onboarding1 from '../assets/onboarding/onboarding-1.png';
+import onboarding2 from '../assets/onboarding/onboarding-2.png';
+import onboarding3 from '../assets/onboarding/onboarding-3.png';
 
 export const onboarding = [
   {
@@ -11,12 +13,12 @@ export const onboarding = [
     id: 2,
     title: 'Add Your Expenses',
     description: 'Add your expenses and keep track of your spending.',
-    image: onboarding1
+    image: onboarding2
   },
   {
     id: 3,
     title: 'Set Your Budget',
     description: 'Set your budget and track your expenses.',
-    image: onboarding1
+    image: onboarding3
   }
 ]

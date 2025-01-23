@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     padding: 8, 
   },
   buttonText: {
-    color: '#211d4ed1',
+    color: colors.primaryPurple,
     fontWeight: 700,
     fontSize: 16
   },
