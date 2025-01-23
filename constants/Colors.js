@@ -12,6 +12,9 @@ export const colors = {
   baseDark: '#0D0E0F',
   yellow: '#FCAC12',
   blue: '#0077FF',
-  blue2: '#BDDCFF'
+  blue2: '#BDDCFF',
+
+  // New colors
+  cardBackground: '#ffffff99'
 
 }

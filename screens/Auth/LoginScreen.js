@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 import AuthContent from '../../components/Auth/AuthContent'
 import Button from '../../components/ExpensesOutput/UI/Button'
+import { colors } from '../../constants/Colors'
 
 const LoginScreen = () => {
   return (
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   },
   authCard: {
     padding: 16,
-    backgroundColor: '#ffffff67',
+    backgroundColor: colors.cardBackground,
     width: '90%',
     borderRadius: 24,
   }

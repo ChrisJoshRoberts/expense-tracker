@@ -65,7 +65,7 @@ function AuthStack() {
   return (
     <>
       <StatusBar style="dark" />
-      <Stack.Navigator initialRouteName='Login' screenOptions={{
+      <Stack.Navigator initialRouteName='Onboarding' screenOptions={{
         headerShown: false
       }}>
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />

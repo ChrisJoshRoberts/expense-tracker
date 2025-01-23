@@ -5,6 +5,7 @@ import Swiper from 'react-native-swiper'
 import { onboarding } from '../../constants'
 import Button from '../../components/ExpensesOutput/UI/Button'
 import { colors } from '../../constants/Colors'
+import logo from '../../assets/onboarding/logo.png'
 
 
 const OnboardingScreen = ({navigation}) => {
@@ -23,6 +24,7 @@ const OnboardingScreen = ({navigation}) => {
         >
           <Text style={styles.skipText}>Skip</Text>
         </TouchableOpacity>
+        <Image source={logo} resizeMode='contain' style={{width: 120}} />
         <Swiper
           loop={false}
           dotStyle={{ backgroundColor: '#ffffff8c', borderColor: '#ffffff8c', borderWidth: 1 }}
@@ -35,6 +37,7 @@ const OnboardingScreen = ({navigation}) => {
                 key={index}
                 style={styles.swiperContainer}
               >
+                <Image source={item.image} style={{width: 200, height: 200}} />
                 <Text style={styles.swiperText}>{item.title}</Text>
                 <Text style={styles.swiperDescription}>{item.description}</Text>
               </View>
@@ -79,6 +82,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ffffff99',
+    marginHorizontal: 16,
+    marginBottom: 48,
+    borderRadius: 32,
   },
   swiperText: {
     textAlign: 'center',
