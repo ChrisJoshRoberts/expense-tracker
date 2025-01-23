@@ -1,13 +1,11 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import logo from '../../assets/onboarding/logo.png'
-
 import AuthContent from '../../components/Auth/AuthContent'
-import Button from '../../components/ExpensesOutput/UI/Button'
 import { colors } from '../../constants/Colors'
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   return (
     <LinearGradient
             colors={['#DEE0E1', '#d0bdd8c9','#a0bececa', '#DEE0E1']}
@@ -16,8 +14,16 @@ const LoginScreen = () => {
           >
       <SafeAreaView style={styles.container}>
         <View style={styles.authCard}>
-          <Image source={logo} resizeMode='contain' style={{ width: 120 }} />
+          <Image source={logo} resizeMode='contain' style={{ width: 80,height: 50}} />
           <AuthContent isLogin />
+        </View>
+        <View style={styles.helperTextContainer}>
+          <Text style={styles.helperText}>Don't have an account?</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SignUp')}
+          >
+            <Text style={styles.linkText}>Sign up</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </LinearGradient>
@@ -41,5 +47,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cardBackground,
     width: '90%',
     borderRadius: 24,
+  },
+  helperTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+    gap: 8
+  },
+  helperText: {
+    color: colors.baseDark,
+    fontSize: 16,
+    opacity: 0.4
+  },
+  linkText: {
+    color: colors.primaryPurple,
+    fontWeight: '700'
   }
 })
