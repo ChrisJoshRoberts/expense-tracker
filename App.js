@@ -73,6 +73,7 @@ function AuthStack() {
             animation: 'fade'
           }}
         />
+        <Stack.Screen name="Authenticated" component={AuthenticatedStack} />
       </Stack.Navigator>
     </>
   )
@@ -84,25 +85,23 @@ function AuthenticatedStack() {
     <StatusBar style="light" />
       <BudgetContextProvider>
         <ExpensesContextProvider>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen name="ExpensesOverview" component={ExpensesOverview} options={{
-                headerShown: false
-              }}/>
-              <Stack.Screen name="ManageExpenses" component={ManageExpense}
-                options={{
-                  headerShown: false,
-                  presentation: 'modal',
-                }}
-              />
-              <Stack.Screen name="AddBudget" component={AddBudget} 
-                options={{
-                  headerShown: false,
-                  presentation: 'modal',
-                }}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="ExpensesOverview" component={ExpensesOverview} options={{
+              headerShown: false
+            }}/>
+            <Stack.Screen name="ManageExpenses" component={ManageExpense}
+              options={{
+                headerShown: false,
+                presentation: 'modal',
+              }}
+            />
+            <Stack.Screen name="AddBudget" component={AddBudget} 
+              options={{
+                headerShown: false,
+                presentation: 'modal',
+              }}
+            />
+          </Stack.Navigator>
         </ExpensesContextProvider>
       </BudgetContextProvider>
     </>

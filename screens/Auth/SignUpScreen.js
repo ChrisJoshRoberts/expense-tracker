@@ -6,6 +6,7 @@ import { colors } from '../../constants/Colors'
 import logo from '../../assets/onboarding/logo.png'
 
 const SignUpScreen = ({navigation}) => {
+
   return (
     <LinearGradient
       style={styles.gradientBackground}
