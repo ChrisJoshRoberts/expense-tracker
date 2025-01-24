@@ -29,7 +29,10 @@ const AuthForm = ({isLogin}) => {
     console.log(email.value)
     await logIn(email.value, password.value)
     setIsAuthenticating(false)
-    navigation.navigate('Authenticated')
+    navigation.navigate('Authenticated', {
+      email: email.value,
+      name: authInputs.name?.value || 'Friend'
+    });
   }
 
 const signUpHandler = async (authInputs) => {

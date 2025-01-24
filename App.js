@@ -51,6 +51,7 @@ function ExpensesOverview() {
           <WalletCards  size={32} color={color} />
         )
       }} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   )
 }
@@ -79,7 +80,8 @@ function AuthStack() {
   )
 }
 
-function AuthenticatedStack() {
+function AuthenticatedStack({route}) {
+
   return (
     <>
     <StatusBar style="light" />
