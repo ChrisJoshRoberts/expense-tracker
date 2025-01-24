@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import AllExpenses from './screens/AllExpenses';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import ManageExpense from './screens/ManageExpense';
 import RecentExpenses from './screens/RecentExpenses';
 import { colors } from './constants/Colors';
@@ -15,6 +15,8 @@ import BudgetContextProvider from './store/budget-context';
 import LoginScreen from './screens/Auth/LoginScreen';
 import SignUpScreen from './screens/Auth/SignUpScreen';
 import OnboardingScreen from './screens/Onboarding/OnboardingScreen';
+import Profile from './screens/Profile';
+import AuthContextProvider from './store/auth-context';
 
 
 const Stack = createNativeStackNavigator()
@@ -111,9 +113,11 @@ function AuthenticatedStack({route}) {
 }
 export default function App() {
   return (
-    <NavigationContainer>
-      <AuthStack />
-    </NavigationContainer>
+    <AuthContextProvider>
+      <NavigationContainer>
+        <AuthStack />
+      </NavigationContainer>
+    </AuthContextProvider>
   );
 }
 

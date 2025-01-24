@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Input from '../ManageExpense/Input'
 import Button from '../ExpensesOutput/UI/Button'
 import { createUser, logIn } from '../../util/auth'
 import { useNavigation } from '@react-navigation/native'
 import LoadingOverlay from '../ExpensesOutput/UI/LoadingOverlay'
 import { colors } from '../../constants/Colors'
+import { AuthContext } from '../../store/auth-context'
 
 const AuthForm = ({isLogin}) => {
   const navigation = useNavigation()
   const [isAuthenticating, setIsAuthenticating] = useState(false)
+  const authCtx = useContext(AuthContext)
   const [authInputs, setAuthInputs] = useState({
     name: {
       value: ''
@@ -29,10 +31,7 @@ const AuthForm = ({isLogin}) => {
     console.log(email.value)
     await logIn(email.value, password.value)
     setIsAuthenticating(false)
-    navigation.navigate('Authenticated', {
-      email: email.value,
-      name: authInputs.name?.value || 'Friend'
-    });
+    navigation.navigate('Authenticated');
   }
 
 const signUpHandler = async (authInputs) => {
@@ -41,6 +40,7 @@ const signUpHandler = async (authInputs) => {
   const {name, email, password} = authInputs
   console.log(authInputs.name.value)
   await createUser(name.value, email.value, password.value)
+  authCtx.authenticate()
   console.log('done')
   setIsAuthenticating(false)
   navigation.navigate('Login')

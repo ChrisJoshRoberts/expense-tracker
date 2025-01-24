@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Alert } from "react-native";
 
 const FIREBASE_KEY = 'AIzaSyDSti_hrIG3icHffHp-F5ZsO5D8JqILBEY'
 
@@ -13,14 +14,13 @@ async function authenticate(mode, email, password, name=null) {
   if (mode === 'signUp') {
     payload.name = name
   }
-
   try {
     const response = await axios.post(url, payload);
     console.log(response.data);
+    const token = response.data.idToken
     return response.data; // Return the response if needed
   } catch (error) {
-    console.error('Authentication error:', error.response?.data || error.message);
-    throw error; // Rethrow to handle it in your UI
+    Alert.alert('An Error Occurred!', error.response.data.error.message, [{ text: 'Okay' }]);
   }
 }
 
