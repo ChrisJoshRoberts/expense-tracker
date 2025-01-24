@@ -107,13 +107,13 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   swiperContainer: {
+    height: '80%',
     paddingVertical: 32,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#ffffff99',
     marginHorizontal: 16,
-    marginBottom: 48,
     borderRadius: 32,
   },
   swiperText: {
