@@ -2,30 +2,36 @@ import axios from "axios";
 
 const FIREBASE_KEY = 'AIzaSyDSti_hrIG3icHffHp-F5ZsO5D8JqILBEY'
 
-export async function createUser(name, email, password) {
-  // Validate the environment variable
-  if (!FIREBASE_KEY) {
-    console.error('FIREBASE_KEY is not defined in environment variables.');
-    throw new Error('FIREBASE_KEY is required to create a user.');
+async function authenticate(mode, email, password, name=null) {
+  const url = `https://identitytoolkit.googleapis.com/v1/accounts:${mode}?key=${FIREBASE_KEY}`;
+
+  const payload = {
+    email,
+    password,
+    returnSecureToken: true,
+  }
+  if (mode === 'signUp') {
+    payload.name = name
   }
 
   try {
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_KEY}`;
-
-    const response = await axios.post(url, {
-      name, // Simplified property assignment
-      email,
-      password,
-      returnSecureToken: true,
-    });
-
-    console.log('User created successfully:', response.data);
-
-    // Return response data to the calling function
-    return response.data;
+    const response = await axios.post(url, payload);
+    console.log(response.data);
+    return response.data; // Return the response if needed
   } catch (error) {
-    // Handle and log errors
-    console.error('Error creating user:', error?.response?.data || error.message);
-    throw error; // Rethrow error for calling function to handle
+    console.error('Authentication error:', error.response?.data || error.message);
+    throw error; // Rethrow to handle it in your UI
   }
 }
+
+export async function createUser(name, email, password) {
+  await authenticate('signUp', email, password, name)
+}
+
+export async function logIn(email, password) {
+  const formattedEmail = email.trim()
+  await authenticate('signInWithPassword', email, password)
+  
+}
+
+
