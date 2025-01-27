@@ -18,19 +18,19 @@ async function authenticate(mode, email, password, name=null) {
     const response = await axios.post(url, payload);
     console.log(response.data);
     const token = response.data.idToken
-    return response.data; // Return the response if needed
+    return token
   } catch (error) {
     Alert.alert('An Error Occurred!', error.response.data.error.message, [{ text: 'Okay' }]);
   }
 }
 
-export async function createUser(name, email, password) {
-  await authenticate('signUp', email, password, name)
+export function createUser(name, email, password) {
+  return authenticate('signUp', email, password, name) 
 }
 
-export async function logIn(email, password) {
+export function logIn(email, password) {
   const formattedEmail = email.trim()
-  await authenticate('signInWithPassword', email, password)
+  return authenticate('signInWithPassword', email, password)
   
 }
 

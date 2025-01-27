@@ -16,7 +16,8 @@ import LoginScreen from './screens/Auth/LoginScreen';
 import SignUpScreen from './screens/Auth/SignUpScreen';
 import OnboardingScreen from './screens/Onboarding/OnboardingScreen';
 import Profile from './screens/Profile';
-import AuthContextProvider from './store/auth-context';
+import AuthContextProvider, { AuthContext } from './store/auth-context';
+import { useContext } from 'react';
 
 
 const Stack = createNativeStackNavigator()
@@ -76,14 +77,12 @@ function AuthStack() {
             animation: 'fade'
           }}
         />
-        <Stack.Screen name="Authenticated" component={AuthenticatedStack} />
       </Stack.Navigator>
     </>
   )
 }
 
-function AuthenticatedStack({route}) {
-
+function AuthenticatedStack() {
   return (
     <>
     <StatusBar style="light" />
@@ -111,12 +110,19 @@ function AuthenticatedStack({route}) {
     </>
   )
 }
+
+function Navigation() {
+  const authCtx = useContext(AuthContext)
+  return (
+    <NavigationContainer>
+      {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
+    </NavigationContainer>
+  )
+}
 export default function App() {
   return (
     <AuthContextProvider>
-      <NavigationContainer>
-        <AuthStack />
-      </NavigationContainer>
+      <Navigation />
     </AuthContextProvider>
   );
 }
