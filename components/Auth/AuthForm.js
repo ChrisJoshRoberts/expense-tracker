@@ -30,7 +30,7 @@ const AuthForm = ({isLogin}) => {
     const {email, password} = authInputs
     console.log(email.value)
     const {token, displayName} = await logIn(email.value, password.value)
-    authCtx.authenticate({token, displayName})
+    authCtx.authenticate(token, displayName)
     setIsAuthenticating(false)
   }
 
