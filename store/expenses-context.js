@@ -1,4 +1,5 @@
-import { createContext, useReducer } from "react"
+import { createContext, useContext, useReducer } from "react"
+import { AuthContext } from "./auth-context"
 
 export const ExpensesContext = createContext({
   expenses: [],
@@ -30,18 +31,22 @@ function expenseReducer(state, action) {
 }
 
 function ExpensesContextProvider({children}) {
+  const { userId } = useContext(AuthContext)
   const [expenseState, dispatch] = useReducer(expenseReducer, [])
   function addExpense(expenseData) {
-    dispatch({type: 'ADD', payload: expenseData})
+    const expenseWithUserId = {...expenseData, userId}
+    dispatch({type: 'ADD', payload: expenseWithUserId})
   }
   function setExpense(expenses) {
-    dispatch({type: 'SET', payload: expenses})
+    const userExpense = expenses.filter(expense => expense.userId === userId)
+    dispatch({type: 'SET', payload: userExpense})
   }
   function deleteExpense(id) {
     dispatch({type: 'DELETE', payload: id})
   }
   function updateExpense(id, expenseData){
-    dispatch({type: 'UPDATE', payload: {id: id, data: expenseData}})
+    const expenseWithUserId = {...expenseData, userId}
+    dispatch({type: 'UPDATE', payload: {id: id, data: expenseWithUserId}})
   }
   const value = {
     expenses: expenseState,

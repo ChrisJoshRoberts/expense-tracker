@@ -67,7 +67,8 @@ const signUpHandler = async (authInputs) => {
               returnKeyType: 'next',
               placeholder: 'Enter name',
               onChangeText: inputChangedHandler.bind(this, 'name'),
-              value: authInputs.name.value
+              value: authInputs.name.value,
+              autoCapitalize: 'firstLetter'
             }}
           />
         }

@@ -22,7 +22,7 @@ const LoginScreen = ({navigation}) => {
         <View style={styles.helperTextContainer}>
           <Text style={styles.helperText}>Don't have an account?</Text>
           <TouchableOpacity
-            onPress={() => navigation.replace('SignUp')}
+            onPress={() => navigation.navigate('SignUp')}
           >
             <Text style={styles.linkText}>Sign up</Text>
           </TouchableOpacity>
