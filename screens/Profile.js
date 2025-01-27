@@ -14,7 +14,7 @@ const Profile = () => {
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontSize: 40, color:colors.baseDark}}>Profile</Text>
-        <Text style={{fontSize: 40, color: colors.baseDark}}>{'hello ' + name}</Text>
+        <Text style={{fontSize: 40, color: colors.baseDark}}>{`Hello ${name ? name : 'there.'}`}</Text>
         <Button onPress={AuthCtx.logout}>Logout</Button>
       </View>
     </SafeAreaView>
