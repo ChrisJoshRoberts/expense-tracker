@@ -7,7 +7,7 @@ import { StyleSheet } from 'react-native';
 import ManageExpense from './screens/ManageExpense';
 import RecentExpenses from './screens/RecentExpenses';
 import { colors } from './constants/Colors';
-import { HandCoins,  WalletCards, ChartPie } from 'lucide-react-native';
+import { HandCoins,  WalletCards, ChartPie, UserRound } from 'lucide-react-native';
 import ExpensesContextProvider from './store/expenses-context';
 import Budget from './screens/Budget';
 import AddBudget from './screens/AddBudget';
@@ -54,7 +54,11 @@ function ExpensesOverview() {
           <WalletCards  size={32} color={color} />
         )
       }} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={Profile} options={{
+        tabBarIcon: ({size, color}) => (
+          <UserRound size={32} color={color} />
+        )
+      }}/>
     </Tab.Navigator>
   )
 }

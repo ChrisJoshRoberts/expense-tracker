@@ -3,16 +3,19 @@ import React, { useContext } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AuthContext } from '../store/auth-context'
 import { colors } from '../constants/Colors'
+import Button from '../components/ExpensesOutput/UI/Button'
 
 const Profile = () => {
   const AuthCtx = useContext(AuthContext)
 
-  const name = AuthCtx.name
+  const name = AuthCtx.displayName
+  console.log(name)
   return (
-    <SafeAreaView>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'red'}}>
+    <SafeAreaView style={{flex: 1}}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontSize: 40, color:colors.baseDark}}>Profile</Text>
-        <Text style={{fontSize: 40, color: colors.baseDark}}>{name}</Text>
+        <Text style={{fontSize: 40, color: colors.baseDark}}>{'hello ' + name}</Text>
+        <Button onPress={AuthCtx.logout}>Logout</Button>
       </View>
     </SafeAreaView>
   )

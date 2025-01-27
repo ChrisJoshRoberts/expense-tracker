@@ -12,13 +12,14 @@ async function authenticate(mode, email, password, name=null) {
     returnSecureToken: true,
   }
   if (mode === 'signUp') {
-    payload.name = name
+    payload.displayName = name
   }
   try {
     const response = await axios.post(url, payload);
     console.log(response.data);
     const token = response.data.idToken
-    return token
+    const displayName = response.data.displayName || name
+    return {token , displayName}
   } catch (error) {
     Alert.alert('An Error Occurred!', error.response.data.error.message, [{ text: 'Okay' }]);
   }
@@ -29,7 +30,6 @@ export function createUser(name, email, password) {
 }
 
 export function logIn(email, password) {
-  const formattedEmail = email.trim()
   return authenticate('signInWithPassword', email, password)
   
 }
