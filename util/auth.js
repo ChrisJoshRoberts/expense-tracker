@@ -16,10 +16,10 @@ async function authenticate(mode, email, password, name=null) {
   }
   try {
     const response = await axios.post(url, payload);
-    console.log(response.data.localId, 'localId');
     const token = response.data.idToken
     const displayName = response.data.displayName || name
-    return {token , displayName}
+    const userId = response.data.localId
+    return {token , displayName, userId}
   } catch (error) {
     Alert.alert('An Error Occurred!', error.response.data.error.message, [{ text: 'Okay' }]);
   }

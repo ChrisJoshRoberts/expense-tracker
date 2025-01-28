@@ -14,7 +14,7 @@ function AuthContextProvider({children}) {
   const [displayName, setDisplayName] = useState('')
   const [userId, setUserId] = useState('')
 
-  function authenticate(token, displayName) {
+  function authenticate(token, displayName, userId) {
     setAuthToken(token)
     setDisplayName(displayName)
     setUserId(userId)

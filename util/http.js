@@ -13,16 +13,17 @@ export async function storeExpense(expenseData) {
     return id;
   } catch (error) {
     console.error("Error storing data:", error.response ? error.response.data : error.message);
-    throw error; // Re-throw the error so the calling code can handle it
+    throw error; 
   }
 }
 
-export async function getExpenses() {
+export async function getExpenses(userId) {
   const response = await axios.get(BASE_URL + "/expenses.json")
 
   const expenses = [];
   console.log(response.data);
   for (const key in response.data) {
+    if (response.data[key].userId !== userId) {
     const expenseObj = {
       id: key,
       amount: response.data[key].amount,
@@ -33,6 +34,7 @@ export async function getExpenses() {
     }
     expenses.push(expenseObj);
   }
+}
   return expenses;
 }
 

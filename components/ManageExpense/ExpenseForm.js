@@ -1,28 +1,31 @@
 import { Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Input from './Input'
 import { colors } from '../../constants/Colors'
 import DropDownInput from './DropDownInput'
 import Button from '../ExpensesOutput/UI/Button'
+import { AuthContext } from '../../store/auth-context'
 
 const ExpenseForm = ({onCancel, submitButtonLabel, onSubmit, title, defaultValues}) => {
-const [inputs, setInputs] = useState({
-  title: { 
-    value: defaultValues ? defaultValues.title : '', 
-    isValid: true,
-  },
-  amount: {
-    value: defaultValues ? defaultValues.amount.toString() : '', 
-    isValid: true,
-  },
-  description: {
-    value: defaultValues ? defaultValues.description : '',
-    isValid: true,
-  },
-  category: {
-    value: defaultValues ? defaultValues.category : '',
-    isValid: true,
-  }
+  const authCtx = useContext(AuthContext)
+  const userId = authCtx.userId
+  const [inputs, setInputs] = useState({
+    title: { 
+      value: defaultValues ? defaultValues.title : '', 
+      isValid: true,
+    },
+    amount: {
+      value: defaultValues ? defaultValues.amount.toString() : '', 
+      isValid: true,
+    },
+    description: {
+      value: defaultValues ? defaultValues.description : '',
+      isValid: true,
+    },
+    category: {
+      value: defaultValues ? defaultValues.category : '',
+      isValid: true,
+    }
 });
 
   const inputChangedHandler = (inputIdentifier, enteredValue) => {
@@ -40,6 +43,7 @@ const [inputs, setInputs] = useState({
       description: inputs.description.value,
       category: inputs.category.value,
       date: new Date(),
+      userId: userId,
     }
     
     const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
@@ -60,7 +64,6 @@ const [inputs, setInputs] = useState({
       })
       return;
     }
-
     onSubmit(expenseData)
   }
 

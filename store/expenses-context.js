@@ -41,7 +41,7 @@ function ExpensesContextProvider({children}) {
   }
   function setExpense(expenses) {
     const userExpense = expenses.filter((expense) => expense.userId === userId)
-    dispatch({type: 'SET', payload: expenses})
+    dispatch({type: 'SET', payload: userExpense})
   }
   function deleteExpense(id) {
     dispatch({type: 'DELETE', payload: id})
