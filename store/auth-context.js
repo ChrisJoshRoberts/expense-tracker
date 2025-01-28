@@ -15,20 +15,6 @@ function AuthContextProvider({children}) {
   const [displayName, setDisplayName] = useState('')
   const [userId, setUserId] = useState('')
 
-  useEffect(() => {
-    async function getAuthToken() {
-      const storedToken = await AsyncStorage.getItem('authToken')
-      const storedDisplayName = await AsyncStorage.getItem('displayName')
-      const storedUserId = await AsyncStorage.getItem('userId')
-      if (storedToken) {
-        console.log('stored token', storedToken)
-        setAuthToken(storedToken)
-        setDisplayName(storedDisplayName)
-        setUserId(storedUserId)
-      }
-    }
-    getAuthToken()
-  }, [])
 
   function authenticate(token, displayName, userId) {
     setAuthToken(token)
@@ -42,6 +28,9 @@ function AuthContextProvider({children}) {
     setAuthToken(null)
     setDisplayName('')
     setUserId('')
+    AsyncStorage.removeItem('authToken')
+    AsyncStorage.removeItem('displayName')
+    AsyncStorage.removeItem('userId')
   }
   const value = {
     token: authToken,

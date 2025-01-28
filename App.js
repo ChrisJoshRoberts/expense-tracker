@@ -17,7 +17,9 @@ import SignUpScreen from './screens/Auth/SignUpScreen';
 import OnboardingScreen from './screens/Onboarding/OnboardingScreen';
 import Profile from './screens/Profile';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo-app-loading';
 
 
 const Stack = createNativeStackNavigator()
@@ -123,10 +125,33 @@ function Navigation() {
     </NavigationContainer>
   )
 }
+
+function Root() {
+  const [isTryingLogIn, setIsTryingLogIn] = useState(true)
+  const authCtx = useContext(AuthContext)
+
+  useEffect(() => {
+    async function getAuthToken() {
+      const storedToken = await AsyncStorage.getItem('authToken')
+      const storedDisplayName = await AsyncStorage.getItem('displayName')
+      const storedUserId = await AsyncStorage.getItem('userId')
+      if (storedToken) {
+        authCtx.authenticate(storedToken, storedDisplayName, storedUserId)
+      }
+      setIsTryingLogIn(false)
+    }
+    getAuthToken()
+  }, [])
+
+  if (isTryingLogIn) {
+    return <AppLoading /> 
+  }
+  return <Navigation />
+}
 export default function App() {
   return (
     <AuthContextProvider>
-      <Navigation />
+      <Root />
     </AuthContextProvider>
   );
 }
