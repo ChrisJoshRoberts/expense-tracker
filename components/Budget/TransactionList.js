@@ -8,6 +8,7 @@ import { ExpensesContext } from '../../store/expenses-context'
 import { getExpenses } from '../../util/http'
 import LoadingOverlay from '../ExpensesOutput/UI/LoadingOverlay'
 import { AuthContext } from '../../store/auth-context'
+import EmptyStateAlert from '../ExpensesOutput/UI/EmptyStateAlert'
 
 const TransactionList = () => {
   const authCtx = useContext(AuthContext)
@@ -41,6 +42,9 @@ const TransactionList = () => {
         <Text style={styles.transactionTitle}>Recent Expenses</Text>
         <PillButton title='See All' onPress={pressHandler} />
       </View>
+        {expensesCtx.expenses.length === 0 && 
+          <EmptyStateAlert text={'No Recent Expenses!'} />
+        }
       <ExpensesList expenses={expensesCtx.expenses} style={{paddingBottom: 324}} />
     </View>
   )

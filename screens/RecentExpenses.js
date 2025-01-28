@@ -6,20 +6,23 @@ import { ExpensesContext } from '../store/expenses-context'
 import { getDateMinusDays } from '../util/date'
 import { getExpenses } from '../util/http'
 import LoadingOverlay from '../components/ExpensesOutput/UI/LoadingOverlay'
+import { AuthContext } from '../store/auth-context'
 
 const RecentExpenses = () => {
   const [isFetching, setIsFetching] = useState(true)
   const expensesCtx = useContext(ExpensesContext)
+  const userId = useContext(AuthContext).userId
 
   useEffect(() => {
     async function fetchExpenses() {
       setIsFetching(true)
-      const expenses = await getExpenses()
+      const expenses = await getExpenses(userId)
       setIsFetching(false)
       expensesCtx.setExpense(expenses)
+      console.log('expenses set', expensesCtx.expenses)
     }
     fetchExpenses()
-  }, [])
+  }, [userId])
 
   if (isFetching) {
     return (
@@ -32,6 +35,8 @@ const RecentExpenses = () => {
     const date7daysAgo = getDateMinusDays(today, 7)
     return expense.date >= date7daysAgo
   })
+
+  console.log('Recent', recentExpenses)
   return (
     <SafeAreaView style={styles.container}>
       <ExpensesOutput 

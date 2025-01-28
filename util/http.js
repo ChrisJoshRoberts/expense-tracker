@@ -30,8 +30,10 @@ export async function getExpenses(userId) {
       description: response.data[key].description,
       date: new Date(response.data[key].date),
       category: response.data[key].category,
+      userId: response.data[key].userId
     }
     expenses.push(expenseObj);
+    console.log(expenses)
   }
 }
   return expenses;
