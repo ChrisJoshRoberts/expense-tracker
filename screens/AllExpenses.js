@@ -8,6 +8,7 @@ import { AuthContext } from '../store/auth-context'
 
 const AllExpenses = () => {
   const expensesCtx = useContext(ExpensesContext)
+  expensesCtx.expenses.map(expense => console.log(expense.userId))
   const userId = useContext(AuthContext).userId
   const userExpenses = expensesCtx.expenses.filter(expense => expense.userId === userId)
   console.log(userExpenses)

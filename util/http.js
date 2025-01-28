@@ -22,7 +22,7 @@ export async function getExpenses(userId) {
   const expenses = [];
   console.log(userId, 'USER ID HERE')
   for (const key in response.data) {
-    if (response.data[key].userId !== userId) {
+    if (response.data[key].userId === userId) {
     const expenseObj = {
       id: key,
       amount: response.data[key].amount,
