@@ -31,22 +31,18 @@ function expenseReducer(state, action) {
 }
 
 function ExpensesContextProvider({children}) {
-  const { userId } = useContext(AuthContext)
   const [expenseState, dispatch] = useReducer(expenseReducer, [])
   function addExpense(expenseData) {
-    const expenseWithUserId = {...expenseData, userId}
-    dispatch({type: 'ADD', payload: expenseWithUserId})
+    dispatch({type: 'ADD', payload: expenseData})
   }
   function setExpense(expenses) {
-    const userExpense = expenses.filter(expense => expense.userId === userId)
-    dispatch({type: 'SET', payload: userExpense})
+    dispatch({type: 'SET', payload: expenses})
   }
   function deleteExpense(id) {
     dispatch({type: 'DELETE', payload: id})
   }
   function updateExpense(id, expenseData){
-    const expenseWithUserId = {...expenseData, userId}
-    dispatch({type: 'UPDATE', payload: {id: id, data: expenseWithUserId}})
+    dispatch({type: 'UPDATE', payload: {id: id, data: expenseData}})
   }
   const value = {
     expenses: expenseState,

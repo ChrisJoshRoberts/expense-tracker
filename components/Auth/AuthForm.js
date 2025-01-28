@@ -37,6 +37,7 @@ const signUpHandler = async (authInputs) => {
   setIsAuthenticating(true)
   const {name, email, password} = authInputs
   const {token, displayName} = await createUser(name.value, email.value, password.value)
+  authCtx.authenticate(token, displayName)
   navigation.navigate('Login')
   }
 
@@ -68,7 +69,7 @@ const signUpHandler = async (authInputs) => {
               placeholder: 'Enter name',
               onChangeText: inputChangedHandler.bind(this, 'name'),
               value: authInputs.name.value,
-              autoCapitalize: 'firstLetter'
+              autoCapitalize: 'words'
             }}
           />
         }
