@@ -6,6 +6,7 @@ import EmptyStateAlert from './UI/EmptyStateAlert'
 
 
 const ExpensesOutput = ({ expenses, expensesPeriod, fallbackText, buttonTitle}) => {
+  
   return (
     <View>
       <ExpensesSummary period={expensesPeriod} expenses={expenses} buttonTitle={buttonTitle}/>

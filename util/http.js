@@ -19,9 +19,8 @@ export async function storeExpense(expenseData) {
 
 export async function getExpenses(userId) {
   const response = await axios.get(BASE_URL + "/expenses.json")
-
   const expenses = [];
-  console.log(response.data);
+  console.log(userId, 'USER ID HERE')
   for (const key in response.data) {
     if (response.data[key].userId !== userId) {
     const expenseObj = {

@@ -28,15 +28,15 @@ const AuthForm = ({isLogin}) => {
     console.log('log in')
     setIsAuthenticating(true)
     const {email, password} = authInputs
-    const {token, displayName} = await logIn(email.value, password.value)
-    authCtx.authenticate(token, displayName)
+    const {token, displayName, userId} = await logIn(email.value, password.value)
+    authCtx.authenticate(token, displayName, userId)
     setIsAuthenticating(false)
   }
 
 const signUpHandler = async (authInputs) => {
   setIsAuthenticating(true)
   const {name, email, password} = authInputs
-  const {token, displayName} = await createUser(name.value, email.value, password.value)
+  const {token, displayName, userId} = await createUser(name.value, email.value, password.value)
   navigation.navigate('Login')
   }
 

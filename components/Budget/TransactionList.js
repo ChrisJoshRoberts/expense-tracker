@@ -7,20 +7,23 @@ import ExpensesList from '../ExpensesOutput/ExpensesList'
 import { ExpensesContext } from '../../store/expenses-context'
 import { getExpenses } from '../../util/http'
 import LoadingOverlay from '../ExpensesOutput/UI/LoadingOverlay'
+import { AuthContext } from '../../store/auth-context'
 
 const TransactionList = () => {
+  const authCtx = useContext(AuthContext)
+  const userId = authCtx.userId
   const [isFetching, setIsFetching] = useState(true)
   const navigation = useNavigation()
   const expensesCtx = useContext(ExpensesContext)
 
   useEffect(() => {
-    async function fetchExpenses() {
+    async function fetchExpenses(userId) {
       setIsFetching(true)
-      const expenses = await getExpenses()
+      const expenses = await getExpenses(userId)
       expensesCtx.setExpense(expenses)
       setIsFetching(false)
     }
-    fetchExpenses()
+    fetchExpenses(userId)
   },[])
 
   const pressHandler = () => {

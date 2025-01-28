@@ -8,7 +8,6 @@ import { ExpensesContext } from '../store/expenses-context';
 import { BudgetContext } from '../store/budget-context';
 
 const Budget = () => {
- 
   const expensesCtx = useContext(ExpensesContext)
   const budgetCtx = useContext(BudgetContext)
   return (
