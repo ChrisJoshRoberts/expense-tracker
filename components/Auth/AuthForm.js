@@ -37,7 +37,6 @@ const signUpHandler = async (authInputs) => {
   setIsAuthenticating(true)
   const {name, email, password} = authInputs
   const {token, displayName} = await createUser(name.value, email.value, password.value)
-  authCtx.authenticate(token, displayName)
   navigation.navigate('Login')
   }
 

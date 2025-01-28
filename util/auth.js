@@ -16,7 +16,7 @@ async function authenticate(mode, email, password, name=null) {
   }
   try {
     const response = await axios.post(url, payload);
-    console.log(response.data);
+    console.log(response.data.localId, 'localId');
     const token = response.data.idToken
     const displayName = response.data.displayName || name
     return {token , displayName}
