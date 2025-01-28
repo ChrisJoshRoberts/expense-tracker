@@ -5,6 +5,7 @@ import { colors } from '../../constants/Colors'
 import Button from '../ExpensesOutput/UI/Button'
 import { useNavigation } from '@react-navigation/native'
 import { BudgetContext } from '../../store/budget-context'
+import { storeBudget } from '../../util/http'
 
 const BudgetForm = () => {
   const [inputValue, setInputValue] = useState({
@@ -32,6 +33,7 @@ const BudgetForm = () => {
         amount: +inputValue.amount
       }
       budgetCtx.setBudget(budgetData)
+      storeBudget(budgetData)
       navigation.goBack()
     }
 
@@ -49,6 +51,7 @@ const BudgetForm = () => {
           keyboardType: 'decimal-pad',
           plaholder: 'Enter amount',
           onChangeText: (enteredValue) => inputChangedHandler(enteredValue),
+          returnKeyType: 'done',
           }}/>
       </View>
       <View style={styles.buttonContainer}>

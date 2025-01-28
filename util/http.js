@@ -46,3 +46,20 @@ export function updateExpense(id, expenseData ) {
 export function deleteExpense(id) {
   return axios.delete(BASE_URL + `/expenses/${id}.json`)
 }
+
+// Budget functions
+
+export async function storeBudget(budgetData) {
+  try {
+    const response = await axios.post(
+      BASE_URL + 'budgets.json', 
+      budgetData
+    )
+    const id = response.data.name
+    console.log('Budget stored successfully:', response.data)
+    return id
+  } catch {
+    console.error('Error storing budget:', error.response ? error.response.data : error.message)
+    throw error
+  }
+}
