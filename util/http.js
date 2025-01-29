@@ -77,3 +77,7 @@ export async function getBudget(userId) {
   }
   return budgets
 }
+
+export function updateBudget(id, budgetData) {
+  return axios.put(BASE_URL + `/budgets/${id}.json`, budgetData)
+}

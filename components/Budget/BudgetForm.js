@@ -8,7 +8,7 @@ import { BudgetContext } from '../../store/budget-context'
 import { storeBudget } from '../../util/http'
 import { AuthContext } from '../../store/auth-context'
 
-const BudgetForm = () => {
+const BudgetForm = ({mode}) => {
   const [inputValue, setInputValue] = useState({
     amount: ''
   })
@@ -41,6 +41,16 @@ const BudgetForm = () => {
       navigation.goBack()
     }
 
+    async function updateBudgetHandler() {
+      const budgetData = {
+        amount: +inputValue.amount,
+        userId: userId
+      }
+      budgetCtx.updateBudget(budgetData)
+      console.log('Budget Updated')
+      navigation.goBack()
+    }
+
   return (
     <>
       <View style={styles.budgetFormContainer}>
@@ -60,7 +70,7 @@ const BudgetForm = () => {
       </View>
       <View style={styles.buttonContainer}>
         <Button onPress={cancelHandler} mode='flat'>Cancel</Button>
-        <Button onPress={setBudgetHandler}>{'Add'}</Button>
+        <Button onPress={mode === 'update'? updateBudgetHandler : setBudgetHandler}>{mode === 'update' ? 'Update': 'Add'}</Button>
       </View>
     </>
   )

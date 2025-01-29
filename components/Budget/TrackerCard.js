@@ -9,7 +9,9 @@ const TrackerCard = ({mode, title, amount}) => {
   const budgetCtx = useContext(BudgetContext)
   const navigation = useNavigation()
   const pressAddHandler = () => {
-    navigation.navigate('AddBudget')
+    navigation.navigate('AddBudget', {
+      mode: 'update',
+    })
   }
   return (
     <View style={styles.trackerCardContainer}>

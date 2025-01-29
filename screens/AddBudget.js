@@ -4,14 +4,15 @@ import { colors } from '../constants/Colors'
 import BudgetForm from '../components/Budget/BudgetForm'
 import { BudgetContext } from '../store/budget-context'
 
-const AddBudget = () => {
-
+const AddBudget = ({route}) => {
+  const mode = route.params?.mode || 'set'
+  const editBudgetId = route.params?.budgetId
   return (
     <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
       <View style={styles.container}>
         <Text style={styles.title}>{'Add Budget'}</Text>
       </View>
-      <BudgetForm />
+      <BudgetForm mode={mode} />
     </SafeAreaView>
   )
 }

@@ -26,14 +26,15 @@ const BudgetContextProvider = ({children}) => {
 
 
   function setBudget(budgetData) {
-    const userBudget = budgetData.filter((budget) => budget.userId === userId)
-    console.log('user budget',userBudget)
-    dispatch({type: 'SET', payload: userBudget})
+    const userBudget = budgetData.find((budget) => budget.userId === userId)
+    if (userBudget) {
+      dispatch({type: 'SET', payload: userBudget})
+    }
   }
 
-  function updateBudget(budgetData) {
+  function updateBudget(id, budgetData) {
     const budgetWithUserId = {...budgetData, userId: userId}
-    dispatch({type: 'UPDATE', payload: budgetWithUserId})
+    dispatch({type: 'UPDATE', payload: { id: id , data: budgetWithUserId}})
   }
   const value = {
     budget: budgetState.budget,
