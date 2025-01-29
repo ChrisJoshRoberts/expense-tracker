@@ -8,25 +8,19 @@ import { ExpensesContext } from '../store/expenses-context';
 import { BudgetContext } from '../store/budget-context';
 import { AuthContext } from '../store/auth-context';
 import { getBudget } from '../util/http';
-
 const Budget = () => {
   const expensesCtx = useContext(ExpensesContext)
   const budgetCtx = useContext(BudgetContext)
   const authCtx = useContext(AuthContext)
   const userId = authCtx.userId
 
-
-
   useEffect(() => {
     async function fetchBudget(userId) {
-      const budget = await getBudget(userId)
-      console.log('Budget', budget[0].amount) 
-      budgetCtx.setBudget(budget[0].amount)
+      const budgets = await getBudget(userId)
+      budgetCtx.setBudget(budgets)
     }
     fetchBudget(userId)
   },[])
-
-  console.log(budgetCtx.budget)
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <LinearGradient 

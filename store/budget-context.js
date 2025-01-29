@@ -26,9 +26,9 @@ const BudgetContextProvider = ({children}) => {
 
 
   function setBudget(budgetData) {
-    console.log('Budget Data', budgetData)
     const userBudget = budgetData.filter((budget) => budget.userId === userId)
-    dispatch({type: 'SET', payload: budgetData})
+    console.log('user budget',userBudget)
+    dispatch({type: 'SET', payload: userBudget})
   }
 
   function updateBudget(budgetData) {
