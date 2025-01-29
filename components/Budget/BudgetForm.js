@@ -6,14 +6,16 @@ import Button from '../ExpensesOutput/UI/Button'
 import { useNavigation } from '@react-navigation/native'
 import { BudgetContext } from '../../store/budget-context'
 import { storeBudget } from '../../util/http'
+import { AuthContext } from '../../store/auth-context'
 
 const BudgetForm = () => {
   const [inputValue, setInputValue] = useState({
     amount: ''
   })
   const budgetCtx = useContext(BudgetContext)
+  const authCtx = useContext(AuthContext)
+  const userId = authCtx.userId
   const navigation = useNavigation()
-
 
   function cancelHandler() {
       navigation.goBack()
@@ -30,7 +32,8 @@ const BudgetForm = () => {
 
     function setBudgetHandler() {
       const budgetData = {
-        amount: +inputValue.amount
+        amount: +inputValue.amount,
+        userId: userId
       }
       budgetCtx.setBudget(budgetData)
       storeBudget(budgetData)

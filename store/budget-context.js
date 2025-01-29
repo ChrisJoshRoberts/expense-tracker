@@ -20,8 +20,12 @@ const budgetReducer = (state, action) => {
 
 const BudgetContextProvider = ({children}) => {
   const [budgetState, dispatch] = useReducer(budgetReducer, {budget: 0})
+  const authCtx = useContext(AuthContext)
+  const userId = authCtx.userId
+
 
   function setBudget(budgetData) {
+    const budgetWithUserId = {...budgetData, userId: userId}
     dispatch({type: 'SET', payload: budgetData})
   }
 
