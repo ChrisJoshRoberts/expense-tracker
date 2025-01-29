@@ -37,6 +37,7 @@ const BudgetForm = () => {
       }
       budgetCtx.setBudget(budgetData)
       storeBudget(budgetData)
+      console.log('Budget Stored')
       navigation.goBack()
     }
 

@@ -1,15 +1,32 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ExpensesSummary from '../components/ExpensesOutput/ExpensesSummary'
 import { LinearGradient } from 'expo-linear-gradient';
 import Trackers from '../components/Budget/Trackers';
 import TransactionList from '../components/Budget/TransactionList';
 import { ExpensesContext } from '../store/expenses-context';
 import { BudgetContext } from '../store/budget-context';
+import { AuthContext } from '../store/auth-context';
+import { getBudget } from '../util/http';
 
 const Budget = () => {
   const expensesCtx = useContext(ExpensesContext)
   const budgetCtx = useContext(BudgetContext)
+  const authCtx = useContext(AuthContext)
+  const userId = authCtx.userId
+
+
+
+  useEffect(() => {
+    async function fetchBudget(userId) {
+      const budget = await getBudget(userId)
+      console.log('Budget', budget[0].amount) 
+      budgetCtx.setBudget(budget[0].amount)
+    }
+    fetchBudget(userId)
+  },[])
+
+  console.log(budgetCtx.budget)
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <LinearGradient 

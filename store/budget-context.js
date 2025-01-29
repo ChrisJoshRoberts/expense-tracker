@@ -1,10 +1,11 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
+import { AuthContext } from "./auth-context";
 
 
 export const BudgetContext = createContext({
   budget: null,
-  setBudget: ({amount}) => {},
-  updateBudget: ({amount}) => {},
+  setBudget: (amount) => {},
+  updateBudget: (amount) => {},
 });
 
 const budgetReducer = (state, action) => {
@@ -25,12 +26,14 @@ const BudgetContextProvider = ({children}) => {
 
 
   function setBudget(budgetData) {
-    const budgetWithUserId = {...budgetData, userId: userId}
+    console.log('Budget Data', budgetData)
+    const userBudget = budgetData.filter((budget) => budget.userId === userId)
     dispatch({type: 'SET', payload: budgetData})
   }
 
   function updateBudget(budgetData) {
-    dispatch({type: 'UPDATE', payload: budgetData})
+    const budgetWithUserId = {...budgetData, userId: userId}
+    dispatch({type: 'UPDATE', payload: budgetWithUserId})
   }
   const value = {
     budget: budgetState.budget,
