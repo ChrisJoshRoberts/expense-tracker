@@ -1,17 +1,19 @@
 import { createContext, useContext, useReducer } from "react";
 import { AuthContext } from "./auth-context";
+import { updateBudget as updateBudgetHttps } from "../util/http";
 
 
 export const BudgetContext = createContext({
   budget: null,
-  setBudget: (amount) => {},
-  updateBudget: (amount) => {},
+  budgetId: null,
+  setBudget: ({amount, budgetId}) => {},
+  updateBudget: ({amount, budgetId}) => {},
 });
 
 const budgetReducer = (state, action) => {
   switch(action.type) {
     case 'SET':
-      return {...state , budget: action.payload.amount}
+      return {...state , budget: action.payload.amount, budgetId: action.payload.budgetId}
     case 'UPDATE':
       return {...state, budget: action.payload.amount}
     default:
@@ -26,15 +28,29 @@ const BudgetContextProvider = ({children}) => {
 
 
   function setBudget(budgetData) {
+    if (!Array.isArray(budgetData)) {
+      budgetData = [budgetData]
+    }
     const userBudget = budgetData.find((budget) => budget.userId === userId)
     if (userBudget) {
-      dispatch({type: 'SET', payload: userBudget})
+      dispatch({type: 'SET', payload: {amount: userBudget.amount, budgetId: userBudget.budgetId}})
     }
   }
 
-  function updateBudget(id, budgetData) {
-    const budgetWithUserId = {...budgetData, userId: userId}
-    dispatch({type: 'UPDATE', payload: { id: id , data: budgetWithUserId}})
+  async function updateBudget(id, budgetData) {
+    if (!id) {
+      console.error('Budget ID is undefined. Cannot update budget.');
+      return;
+    }
+  
+    const budgetWithUserId = { ...budgetData, userId: userId }; // Add userId to data
+    try {
+      await updateBudgetHttps(id, budgetWithUserId); // Use correct ID
+      dispatch({ type: 'UPDATE', payload: { amount: budgetWithUserId.amount } }); // Update local state
+      console.log('Budget updated successfully with ID:', id);
+    } catch (error) {
+      console.error('Failed to update budget:', error);
+    }
   }
   const value = {
     budget: budgetState.budget,

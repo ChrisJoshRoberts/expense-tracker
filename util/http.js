@@ -70,7 +70,8 @@ export async function getBudget(userId) {
       const budgetObj = {
         id: key, 
         amount: response.data[key].amount,
-        userId: response.data[key].userId
+        userId: response.data[key].userId,
+        budgetId: response.data[key].budgetId
       }
       budgets.push(budgetObj)
     } 
@@ -79,5 +80,16 @@ export async function getBudget(userId) {
 }
 
 export function updateBudget(id, budgetData) {
+  if (!id) {
+    console.error('No ID provided to updateBudget');
+    return;
+  }
+
   return axios.put(BASE_URL + `/budgets/${id}.json`, budgetData)
+    .then(response => {
+      console.log('Firebase response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error updating budget in Firebase:', error);
+    });
 }

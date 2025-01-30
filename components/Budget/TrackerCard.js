@@ -35,7 +35,7 @@ const TrackerCard = ({mode, title, amount}) => {
     <View>
       <Text style={styles.trackerCardTitle}>{title}</Text>
       <Text style={[styles.trackerCardAmount, {color: mode === 'Expense' ? "#FF5C58" : colors.success }]}>
-        {mode === 'Expense' ? `-R${amount}` : `R${amount}` }
+        {mode === 'Expense' ? `-R${amount.toFixed(2)}` : `R${amount.toFixed(2)}` }
       </Text>
     </View>
   </View>

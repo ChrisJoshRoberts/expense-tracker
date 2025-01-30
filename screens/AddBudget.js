@@ -2,11 +2,9 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import { colors } from '../constants/Colors'
 import BudgetForm from '../components/Budget/BudgetForm'
-import { BudgetContext } from '../store/budget-context'
 
 const AddBudget = ({route}) => {
   const mode = route.params?.mode || 'set'
-  const editBudgetId = route.params?.budgetId
   return (
     <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
       <View style={styles.container}>

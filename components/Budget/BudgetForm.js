@@ -3,10 +3,12 @@ import React, { useContext, useState } from 'react'
 import Input from '../ManageExpense/Input'
 import { colors } from '../../constants/Colors'
 import Button from '../ExpensesOutput/UI/Button'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { BudgetContext } from '../../store/budget-context'
 import { storeBudget } from '../../util/http'
 import { AuthContext } from '../../store/auth-context'
+import 'react-native-get-random-values'
+import { v4 as uuidv4 } from 'uuid'
 
 const BudgetForm = ({mode}) => {
   const [inputValue, setInputValue] = useState({
@@ -16,6 +18,10 @@ const BudgetForm = ({mode}) => {
   const authCtx = useContext(AuthContext)
   const userId = authCtx.userId
   const navigation = useNavigation()
+  const budgetId = budgetCtx.budget
+
+  console.log(budgetId) 
+
 
   function cancelHandler() {
       navigation.goBack()
@@ -33,7 +39,8 @@ const BudgetForm = ({mode}) => {
     function setBudgetHandler() {
       const budgetData = {
         amount: +inputValue.amount,
-        userId: userId
+        userId: userId,
+        budgetId: uuidv4()
       }
       budgetCtx.setBudget(budgetData)
       storeBudget(budgetData)
@@ -42,15 +49,19 @@ const BudgetForm = ({mode}) => {
     }
 
     async function updateBudgetHandler() {
+      if (!budgetId) {
+        console.error('Budget ID is undefined. Cannot update budget.');
+        return;
+      }
       const budgetData = {
         amount: +inputValue.amount,
-        userId: userId
+        userId: userId,
+        budgetId: budgetId
       }
-      budgetCtx.updateBudget(budgetData)
+      budgetCtx.updateBudget(budgetId, budgetData)
       console.log('Budget Updated')
       navigation.goBack()
     }
-
   return (
     <>
       <View style={styles.budgetFormContainer}>

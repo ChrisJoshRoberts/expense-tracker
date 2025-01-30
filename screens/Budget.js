@@ -14,6 +14,7 @@ const Budget = () => {
   const authCtx = useContext(AuthContext)
   const userId = authCtx.userId
 
+
   useEffect(() => {
     async function fetchBudget(userId) {
       const budgets = await getBudget(userId)
