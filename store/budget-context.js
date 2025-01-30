@@ -54,6 +54,7 @@ const BudgetContextProvider = ({children}) => {
   }
   const value = {
     budget: budgetState.budget,
+    budgetId: budgetState.budgetId,
     setBudget: setBudget,
     updateBudget: updateBudget
   }

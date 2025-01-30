@@ -18,9 +18,9 @@ const BudgetForm = ({mode}) => {
   const authCtx = useContext(AuthContext)
   const userId = authCtx.userId
   const navigation = useNavigation()
-  const budgetId = budgetCtx.budget
+  const budgetId = budgetCtx.budgetId// changed without testing
 
-  console.log(budgetId) 
+  console.log(typeof(budgetId)) 
 
 
   function cancelHandler() {
