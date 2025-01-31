@@ -62,14 +62,14 @@ export async function storeBudget(budgetData) {
 
 export async function getBudget(userId) {
   const response = await axios.get(BASE_URL + "/budgets.json")
-  let budget = null;
+  let budgets = [];
   for (const key in response.data) {
     if (response.data[key].userId === userId) {
-      budget = {
+      budgets.push({
         id: key,
         amount: response.data[key].amount,
         userId: response.data[key].userId
-      }
+      }) 
     }
   }
   return budget;

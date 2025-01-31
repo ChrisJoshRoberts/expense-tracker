@@ -17,12 +17,13 @@ const Budget = () => {
 
   useEffect(() => {
     async function fetchBudget(userId) {
-      const budgets = await getBudget(userId)
-      budgetCtx.setBudget(budgets)
+      const budgets = await getBudget(userId);
+      budgetCtx.setBudget(budgets); // Store all budgets in context
+      console.log('Budgets fetched:', budgets);
     }
-    fetchBudget(userId)
-    console.log('Budgets', budgetCtx.budgets)
-  },[])
+  
+    if (userId) fetchBudget(userId);
+  }, [userId, budgetCtx]);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
