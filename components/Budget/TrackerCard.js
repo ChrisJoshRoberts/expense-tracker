@@ -7,10 +7,15 @@ import { BudgetContext } from '../../store/budget-context'
 
 const TrackerCard = ({mode, title, amount}) => {
   const budgetCtx = useContext(BudgetContext)
+  const budgets = budgetCtx.budgets
   const navigation = useNavigation()
+
+  budgets.map(budget => console.log(budget.id))
+
   const pressAddHandler = () => {
     navigation.navigate('AddBudget', {
       mode: 'update',
+      budgetId: budgetCtx.budgets[0].id,
     })
   }
   return (

@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from "react"
 import { AuthContext } from "./auth-context"
+import { updateBudget as updateBudgetHttp } from '../util/http'
 
 export const BudgetContext = createContext({
   budgets: [],
@@ -45,8 +46,9 @@ function BudgetContextProvider({children}) {
   function deleteBudget(id) {
     dispatch({type: 'DELETE', payload: id})
   }
-  function updateBudget(id, budgetData) {
+  async function updateBudget(id, budgetData) {
     const budgetWithUserId = {...budgetData, userId: userId}
+    await updateBudgetHttp(id, budgetWithUserId)
     dispatch({type: 'UPDATE', payload: {id: id, data: budgetWithUserId}})
   }
   const value = {

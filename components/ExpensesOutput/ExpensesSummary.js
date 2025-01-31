@@ -5,20 +5,14 @@ import { BudgetContext } from '../../store/budget-context'
 
 const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
   const budgetCtx = useContext(BudgetContext)
-  const budget = budgetCtx.budgets
+  const budgets = budgetCtx.budgets
   const expensesTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0)
 
-  const testBudget = budget - expensesTotal
-
-  let totalAmount = expensesTotal
-
-  if (period === 'Budget left') {
-    totalAmount = testBudget
-  }
+  const totalAmount = budgets.length > 0 ? budgets[0].amount - expensesTotal : 0
   
   return (
   <View style={styles.summaryContainer}>
-    {budget.length <= 0 && 
+    {budgets.length <= 0 && 
       <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'flex-end'}}>
         <View>
         <Text style={styles.periodTitle}>No Budget set</Text>
@@ -27,7 +21,7 @@ const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
         <IconButtonAdd title={buttonTitle} />
       </View>
     }
-    { budget.length > 0 &&
+    { budgets.length > 0 &&
     <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'flex-end'}}>
       <View>
         <Text style={styles.periodTitle}>{period}</Text>

@@ -2,20 +2,17 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import { colors } from '../constants/Colors'
 import BudgetForm from '../components/Budget/BudgetForm'
-import { BudgetContext } from '../store/budget-context'
 
 const AddBudget = ({route}) => {
   const mode = route.params?.mode || 'set'
-  existingBudget = useContext(BudgetContext).budgetId ? useContext(BudgetContext).budgetId : null
-
-
+  const budgetId = route.params?.budgetId || null
 
   return (
     <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
       <View style={styles.container}>
         <Text style={styles.title}>{'Add Budget'}</Text>
       </View>
-      <BudgetForm mode={mode}/>
+      <BudgetForm mode={mode} budgetId={budgetId}/>
     </SafeAreaView>
   )
 }

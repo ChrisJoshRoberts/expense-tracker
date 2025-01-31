@@ -3,13 +3,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import Input from '../ManageExpense/Input'
 import { colors } from '../../constants/Colors'
 import Button from '../ExpensesOutput/UI/Button'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { BudgetContext } from '../../store/budget-context'
-import { storeBudget, updateBudget } from '../../util/http'
+import { storeBudget } from '../../util/http'
 import { AuthContext } from '../../store/auth-context'
 import 'react-native-get-random-values'
 
-const BudgetForm = ({mode}) => {
+const BudgetForm = ({mode, budgetId}) => {
   const [inputValue, setInputValue] = useState({
     amount: ''
   })
@@ -17,10 +17,6 @@ const BudgetForm = ({mode}) => {
   const authCtx = useContext(AuthContext)
   const userId = authCtx.userId
   const navigation = useNavigation()
-  const budgetId = budgetCtx.budgetId
-  const userBudgetData = budgetCtx.budgets.find(budget => budget.id === budgetId)
-
-  
 
   function cancelHandler() {
       navigation.goBack()
@@ -41,13 +37,19 @@ const BudgetForm = ({mode}) => {
         userId: userId,
       }
       const id = await storeBudget(budgetData)
-      budgetCtx.addBudget(budgetData)
+      const budgetWithId = {...budgetData, id: id}
+      budgetCtx.addBudget(budgetWithId)
       navigation.goBack()
     }
 
     async function updateBudgetHandler() {
-      budgetCtx.updateBudget(budgetId, userBudgetData)
-      await updateBudget(budgetId, userBudgetData)
+      
+      console.log('updating budget')
+      const budgetData = {
+        amount: +inputValue.amount,
+        userId: userId,
+      }
+      budgetCtx.updateBudget(budgetId, budgetData)
       navigation.goBack()
     }
   return (
