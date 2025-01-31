@@ -1,5 +1,5 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
+import { SafeAreaView, StyleSheet } from 'react-native'
+import React, { useContext, useEffect } from 'react'
 import ExpensesSummary from '../components/ExpensesOutput/ExpensesSummary'
 import { LinearGradient } from 'expo-linear-gradient';
 import Trackers from '../components/Budget/Trackers';
@@ -19,11 +19,10 @@ const Budget = () => {
     async function fetchBudget(userId) {
       const budgets = await getBudget(userId);
       budgetCtx.setBudget(budgets); // Store all budgets in context
-      console.log('Budgets fetched:', budgets);
+      
     }
-  
-    if (userId) fetchBudget(userId);
-  }, [userId, budgetCtx]);
+    fetchBudget(userId);
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>

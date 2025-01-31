@@ -9,7 +9,6 @@ export async function storeExpense(expenseData) {
       expenseData
     );
     const id = response.data.name
-    console.log("Data stored successfully:", response.data);
     return id;
   } catch (error) {
     console.error("Error storing data:", error.response ? error.response.data : error.message);
@@ -53,7 +52,6 @@ export async function storeBudget(budgetData) {
       BASE_URL + "/budgets.json",
       budgetData
     );
-    console.log("Data stored successfully:", response.data);
   } catch (error) {
     console.error("Error storing data:", error.response ? error.response.data : error.message);
     throw error;
@@ -62,6 +60,7 @@ export async function storeBudget(budgetData) {
 
 export async function getBudget(userId) {
   const response = await axios.get(BASE_URL + "/budgets.json")
+
   let budgets = [];
   for (const key in response.data) {
     if (response.data[key].userId === userId) {
@@ -72,7 +71,7 @@ export async function getBudget(userId) {
       }) 
     }
   }
-  return budget;
+  return budgets;
 }
 
 export function updateBudget(id, budgetData) {

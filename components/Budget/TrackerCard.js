@@ -11,7 +11,6 @@ const TrackerCard = ({mode, title, amount}) => {
   const pressAddHandler = () => {
     navigation.navigate('AddBudget', {
       mode: 'update',
-      budgetId: id,
     })
   }
   return (

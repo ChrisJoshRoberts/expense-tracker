@@ -25,7 +25,6 @@ const AuthForm = ({isLogin}) => {
   })
 
   const logInHandler = async (authInputs) => {
-    console.log('log in')
     setIsAuthenticating(true)
     const {email, password} = authInputs
     const {token, displayName, userId} = await logIn(email.value, password.value)

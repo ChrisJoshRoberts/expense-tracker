@@ -8,7 +8,7 @@ const AddBudget = ({route}) => {
   const mode = route.params?.mode || 'set'
   existingBudget = useContext(BudgetContext).budgetId ? useContext(BudgetContext).budgetId : null
 
-  console.log('exisiting budget: ', existingBudget)
+
 
   return (
     <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>

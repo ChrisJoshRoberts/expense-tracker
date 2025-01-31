@@ -24,7 +24,6 @@ const LoginScreen = ({navigation}) => {
           <TouchableOpacity
             onPress={() => {
               navigation.replace('SignUp')
-              console.log('Sign Up')
             }}
           >
             <Text style={styles.linkText}>Sign Up</Text>

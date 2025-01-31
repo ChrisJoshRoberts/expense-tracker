@@ -9,7 +9,7 @@ const Profile = () => {
   const AuthCtx = useContext(AuthContext)
 
   const name = AuthCtx.displayName
-  console.log(name)
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

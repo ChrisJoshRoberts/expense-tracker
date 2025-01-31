@@ -19,7 +19,6 @@ const RecentExpenses = () => {
       const expenses = await getExpenses(userId)
       setIsFetching(false)
       expensesCtx.setExpense(expenses)
-      console.log('expenses set', expensesCtx.expenses)
     }
     fetchExpenses()
   }, [userId])
@@ -36,7 +35,6 @@ const RecentExpenses = () => {
     return expense.date >= date7daysAgo
   })
 
-  console.log('Recent', recentExpenses)
   return (
     <SafeAreaView style={styles.container}>
       <ExpensesOutput 

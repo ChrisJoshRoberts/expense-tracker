@@ -15,7 +15,7 @@ const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
   if (period === 'Budget left') {
     totalAmount = testBudget
   }
-  console.log(budget)
+  
   return (
   <View style={styles.summaryContainer}>
     {budget.length <= 0 && 
