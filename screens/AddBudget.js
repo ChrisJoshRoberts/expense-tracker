@@ -7,6 +7,8 @@ const AddBudget = ({route}) => {
   const mode = route.params?.mode || 'set'
   const budgetId = route.params?.budgetId || null
 
+  console.log('budget id in the addBudget screen', budgetId)
+
   return (
     <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
       <View style={styles.container}>

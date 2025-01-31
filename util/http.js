@@ -52,6 +52,8 @@ export async function storeBudget(budgetData) {
       BASE_URL + "/budgets.json",
       budgetData
     );
+    const id = response.data.name;
+    return id;
   } catch (error) {
     console.error("Error storing data:", error.response ? error.response.data : error.message);
     throw error;

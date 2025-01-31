@@ -32,12 +32,14 @@ const BudgetForm = ({mode, budgetId}) => {
     }
 
     async function addBudgetHandler() {
+      console.log('adding budget')
       const budgetData = {
         amount: +inputValue.amount,
         userId: userId,
       }
       const id = await storeBudget(budgetData)
       const budgetWithId = {...budgetData, id: id}
+      console.log('adding this budget: ', budgetWithId)
       budgetCtx.addBudget(budgetWithId)
       navigation.goBack()
     }
@@ -49,6 +51,7 @@ const BudgetForm = ({mode, budgetId}) => {
         amount: +inputValue.amount,
         userId: userId,
       }
+      console.log('updating this budget: ' , budgetId , 'with this data: ', budgetData)
       budgetCtx.updateBudget(budgetId, budgetData)
       navigation.goBack()
     }

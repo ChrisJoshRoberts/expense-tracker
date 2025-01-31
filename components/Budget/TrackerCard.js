@@ -4,18 +4,22 @@ import { ArrowBigDownDash, Plus } from 'lucide-react-native'
 import { colors } from '../../constants/Colors'
 import { useNavigation } from '@react-navigation/native'
 import { BudgetContext } from '../../store/budget-context'
+import { AuthContext } from '../../store/auth-context'
 
 const TrackerCard = ({mode, title, amount}) => {
   const budgetCtx = useContext(BudgetContext)
   const budgets = budgetCtx.budgets
+  const authCtx = useContext(AuthContext)
+  const userId = authCtx.userId
   const navigation = useNavigation()
 
-  budgets.map(budget => console.log(budget.id))
+  console.log(budgets.filter(budget => budget.userId === userId).id)
+  budgets.map(budget => console.log(budget.id, 'testing'))
 
   const pressAddHandler = () => {
     navigation.navigate('AddBudget', {
       mode: 'update',
-      budgetId: budgetCtx.budgets[0].id,
+      budgetId: budgets.find(budget => budget.userId === userId).id
     })
   }
   return (
