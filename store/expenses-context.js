@@ -47,6 +47,7 @@ function ExpensesContextProvider({children}) {
     dispatch({type: 'DELETE', payload: id})
   }
   function updateExpense(id, expenseData){
+    console.log(id, 'update expense id')
     const expenseWithUserId = {...expenseData, userId: userId}
     dispatch({type: 'UPDATE', payload: {id: id, data: expenseWithUserId}})
   }

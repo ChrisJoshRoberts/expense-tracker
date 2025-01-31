@@ -1,62 +1,60 @@
-import { createContext, useContext, useReducer } from "react";
-import { AuthContext } from "./auth-context";
-import { updateBudget as updateBudgetHttps } from "../util/http";
-
+import { createContext, useContext, useReducer } from "react"
+import { AuthContext } from "./auth-context"
 
 export const BudgetContext = createContext({
-  budget: null,
-  budgetId: null,
-  setBudget: ({amount, budgetId}) => {},
-  updateBudget: ({amount, budgetId}) => {},
-});
+  budgets: [],
+  addBudget: (amount) => {},
+  setBudget: (amount) => {},
+  updateBudget: (id, amount) => {},
+  deleteBudget: (id) => {}
+})
 
-const budgetReducer = (state, action) => {
+function budgetReducer(state, action) {
   switch(action.type) {
+    case 'ADD' : 
+      return [action.payload, ...state]
     case 'SET':
-      return {...state , budget: action.payload.amount, budgetId: action.payload.budgetId}
+      return action.payload
     case 'UPDATE':
-      return {...state, budget: action.payload.amount}
+      const updateableBudgetIndex = state.findIndex((budget) => budget.id === action.payload.id)
+      const updatableBudget = state[updateableBudgetIndex]
+      const updatedItem = {...updatableBudget, ...action.payload.data}
+      const updatedBudgets = [...state]
+      updatedBudgets[updateableBudgetIndex] = updatedItem
+      return updatedBudgets
+    case 'DELETE':
+      return state.filter((budget) => budget.id !== action.payload)
     default:
       return state
   }
 }
 
-const BudgetContextProvider = ({children}) => {
-  const [budgetState, dispatch] = useReducer(budgetReducer, {budget: 0})
+function BudgetContextProvider({children}) {
   const authCtx = useContext(AuthContext)
   const userId = authCtx.userId
+  const [budgetState, dispatch] = useReducer(budgetReducer, [])
 
-
-  function setBudget(budgetData) {
-    if (!Array.isArray(budgetData)) {
-      budgetData = [budgetData]
-    }
-    const userBudget = budgetData.find((budget) => budget.userId === userId)
-    if (userBudget) {
-      dispatch({type: 'SET', payload: {amount: userBudget.amount, budgetId: userBudget.budgetId}})
-    }
+  function addBudget(budgetData) {
+    const budgetWithUserId = {...budgetData, userId: userId}
+    dispatch({type: 'ADD', payload: budgetWithUserId})
   }
-
-  async function updateBudget(id, budgetData) {
-    if (!id) {
-      console.error('Budget ID is undefined. Cannot update budget.');
-      return;
-    }
-  
-    const budgetWithUserId = { ...budgetData, userId: userId }; // Add userId to data
-    try {
-      await updateBudgetHttps(id, budgetWithUserId); // Use correct ID
-      dispatch({ type: 'UPDATE', payload: { amount: budgetWithUserId.amount } }); // Update local state
-      console.log('Budget updated successfully with ID:', id);
-    } catch (error) {
-      console.error('Failed to update budget:', error);
-    }
+  function setBudget(budgets) {
+    const userBudget = budgets.filter((budget) => budget.userId === userId)
+    dispatch({type: 'SET', payload: userBudget})
+  }
+  function deleteBudget(id) {
+    dispatch({type: 'DELETE', payload: id})
+  }
+  function updateBudget(id, budgetData) {
+    const budgetWithUserId = {...budgetData, userId: userId}
+    dispatch({type: 'UPDATE', payload: {id: id, data: budgetWithUserId}})
   }
   const value = {
-    budget: budgetState.budget,
-    budgetId: budgetState.budgetId,
+    budgets: budgetState,
+    addBudget: addBudget,
     setBudget: setBudget,
-    updateBudget: updateBudget
+    updateBudget: updateBudget,
+    deleteBudget: deleteBudget
   }
   return (
     <BudgetContext.Provider value={value}>

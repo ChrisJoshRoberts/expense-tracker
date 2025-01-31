@@ -8,12 +8,12 @@ import { ExpensesContext } from '../store/expenses-context';
 import { BudgetContext } from '../store/budget-context';
 import { AuthContext } from '../store/auth-context';
 import { getBudget } from '../util/http';
+
 const Budget = () => {
   const expensesCtx = useContext(ExpensesContext)
   const budgetCtx = useContext(BudgetContext)
   const authCtx = useContext(AuthContext)
   const userId = authCtx.userId
-
 
   useEffect(() => {
     async function fetchBudget(userId) {
@@ -21,7 +21,9 @@ const Budget = () => {
       budgetCtx.setBudget(budgets)
     }
     fetchBudget(userId)
+    console.log('Budgets', budgetCtx.budgets)
   },[])
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <LinearGradient 
@@ -29,7 +31,7 @@ const Budget = () => {
       style={styles.background}
       ></LinearGradient>
       <ExpensesSummary period={'Budget left'} expenses={expensesCtx.expenses} buttonTitle={'Set Budget'}/>
-      <Trackers budget={budgetCtx.budget} />
+      <Trackers budget={budgetCtx.budgets} />
       {/* 
       TODO ADD Filters Component
       */}

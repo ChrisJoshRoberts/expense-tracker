@@ -11,11 +11,12 @@ const TrackerCard = ({mode, title, amount}) => {
   const pressAddHandler = () => {
     navigation.navigate('AddBudget', {
       mode: 'update',
+      budgetId: id,
     })
   }
   return (
     <View style={styles.trackerCardContainer}>
-      {mode !== 'Expense' && budgetCtx.budget > 0 &&
+      {mode !== 'Expense' && budgetCtx.budgets.length > 0 &&
       <Pressable 
         onPress={pressAddHandler}
         style={({pressed})=> [styles.plusIcon, {opacity: pressed ? 0.6: 1}]}>

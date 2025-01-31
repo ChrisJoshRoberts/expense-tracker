@@ -50,46 +50,35 @@ export function deleteExpense(id) {
 export async function storeBudget(budgetData) {
   try {
     const response = await axios.post(
-      BASE_URL + '/budgets.json', 
+      BASE_URL + "/budgets.json",
       budgetData
-    )
-    const id = response.data.name
-    console.log('Budget stored successfully:', response.data)
-    return id
-  } catch {
-    console.error('Error storing budget:', error.response ? error.response.data : error.message)
-    throw error
+    );
+    console.log("Data stored successfully:", response.data);
+  } catch (error) {
+    console.error("Error storing data:", error.response ? error.response.data : error.message);
+    throw error;
   }
 }
 
 export async function getBudget(userId) {
-  const response = await axios.get(BASE_URL + '/budgets.json')
-  const budgets = []
+  const response = await axios.get(BASE_URL + "/budgets.json")
+  let budget = null;
   for (const key in response.data) {
     if (response.data[key].userId === userId) {
-      const budgetObj = {
-        id: key, 
+      budget = {
+        id: key,
         amount: response.data[key].amount,
-        userId: response.data[key].userId,
-        budgetId: response.data[key].budgetId
+        userId: response.data[key].userId
       }
-      budgets.push(budgetObj)
-    } 
+    }
   }
-  return budgets
+  return budget;
 }
 
 export function updateBudget(id, budgetData) {
-  if (!id) {
-    console.error('No ID provided to updateBudget');
-    return;
-  }
+  return axios.put(BASE_URL + `/budgets/${id}.json`, budgetData);
+}
 
-  return axios.put(BASE_URL + `/budgets/${id}.json`, budgetData)
-    .then(response => {
-      console.log('Firebase response:', response.data);
-    })
-    .catch(error => {
-      console.error('Error updating budget in Firebase:', error);
-    });
+export function deleteBudget(id) {
+  return axios.delete(BASE_URL + `/budgets/${id}.json`)
 }
