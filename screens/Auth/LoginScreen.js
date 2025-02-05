@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import logo from '../../assets/onboarding/logo.png'
@@ -13,22 +13,28 @@ const LoginScreen = ({navigation}) => {
             style={styles.gradientBackground}
           >
       <SafeAreaView style={styles.container}>
-        <View style={styles.authCard}>
-          <View style={{width: '100%', alignItems: 'center'}}>
-            <Image source={logo} resizeMode='contain' style={{ width: 100,height: 50}} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardAvoidingView}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
+        >
+          <View style={styles.authCard}>
+            <View style={{width: '100%', alignItems: 'center'}}>
+              <Image source={logo} resizeMode='contain' style={{ width: 100,height: 50}} />
+            </View>
+            <AuthContent isLogin />
           </View>
-          <AuthContent isLogin />
-        </View>
-        <View style={styles.helperTextContainer}>
-          <Text style={styles.helperText}>Don't have an account?</Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.replace('SignUp')
-            }}
-          >
-            <Text style={styles.linkText}>Sign Up</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.helperTextContainer}>
+            <Text style={styles.helperText}>Don't have an account?</Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.replace('SignUp')
+              }}
+            >
+              <Text style={styles.linkText}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView> 
       </SafeAreaView>
     </LinearGradient>
   )
@@ -40,11 +46,15 @@ const styles = StyleSheet.create({
   gradientBackground: {
     flex: 1,
   },
+  keyboardAvoidingView: {
+    flex: 1, 
+    width: '100%', 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16
+    marginBottom: 0,
   },
   authCard: {
     padding: 16,
