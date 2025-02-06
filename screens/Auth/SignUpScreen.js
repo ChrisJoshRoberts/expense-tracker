@@ -1,6 +1,7 @@
 import { 
   Image, 
   KeyboardAvoidingView, 
+  Platform, 
   SafeAreaView, 
   StyleSheet, 
   Text, 
