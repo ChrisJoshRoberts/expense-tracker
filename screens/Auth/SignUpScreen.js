@@ -1,4 +1,11 @@
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { 
+  Image, 
+  KeyboardAvoidingView, 
+  SafeAreaView, 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  View } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import AuthContent from '../../components/Auth/AuthContent'
@@ -13,20 +20,26 @@ const SignUpScreen = ({navigation}) => {
       locations={[1, 0.2, 0.5, 1]}
     >
       <SafeAreaView style={styles.container}>
-        <View style={styles.authCard}>
-          <View style={{width: '100%', alignItems: 'center'}}>
-            <Image source={logo} resizeMode='contain' style={{ width: 100,height: 50}} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardAvoidingView}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
+        >
+          <View style={styles.authCard}>
+            <View style={{width: '100%', alignItems: 'center'}}>
+              <Image source={logo} resizeMode='contain' style={{ width: 100,height: 50}} />
+            </View>
+            <AuthContent />
           </View>
-          <AuthContent />
-        </View>
-        <View style={styles.helperTextContainer}>
-          <Text style={styles.helperText}>Already have an account? </Text>
-            <TouchableOpacity
-              onPress={() => navigation.replace('Login')}
-            >
-              <Text style={styles.linkText}>Login</Text>
-            </TouchableOpacity>
-        </View>
+          <View style={styles.helperTextContainer}>
+            <Text style={styles.helperText}>Already have an account? </Text>
+              <TouchableOpacity
+                onPress={() => navigation.replace('Login')}
+              >
+                <Text style={styles.linkText}>Login</Text>
+              </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </LinearGradient>
   )
@@ -37,6 +50,12 @@ export default SignUpScreen
 const styles = StyleSheet.create({
   gradientBackground: {
     flex: 1,
+  },
+  keyboardAvoidingView: {
+    flex: 1, 
+    width: '100%', 
+    alignItems: 'center', 
+    justifyContent: 'center'
   },
   authCard: {
     padding: 16,
