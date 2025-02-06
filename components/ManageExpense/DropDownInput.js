@@ -135,6 +135,8 @@ const DropDownInput = ({onSelectItem, valueDropdown, isValid}) => {
         placeholderStyle={{color: colors.baseDark, opacity: 0.3}}
         arrowIconStyle={{tintColor: colors.primaryPurple,}}
         dropDownContainerStyle={{borderRadius: 12, borderWidth: 0, backgroundColor: colors.offWhite}}
+        searchContainerStyle={styles.searchBox}
+        searchTextInputStyle={styles.searchTextInput}
       />
     </>
   )
@@ -167,4 +169,10 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     color: colors.baseDark
   },
+  searchBox: {
+    // TODO
+  },
+  searchTextInput: {
+    // TODO
+  }
 })
