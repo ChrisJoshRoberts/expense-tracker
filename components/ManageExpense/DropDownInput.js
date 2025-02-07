@@ -170,7 +170,11 @@ const styles = StyleSheet.create({
     color: colors.baseDark
   },
   searchBox: {
-    // TODO
+    // TODO 
+    borderWidth: 1, 
+    borderRadius: 12,
+    borderColor: colors.primaryPurple,
+    backgroundColor: colors.offWhite,
   },
   searchTextInput: {
     // TODO
