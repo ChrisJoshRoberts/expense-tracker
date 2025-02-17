@@ -1,4 +1,6 @@
 import axios from "axios";
+import { AuthContext } from "../store/auth-context";
+import { useContext } from "react";
 
 const BASE_URL = "https://expense-tracker-f6499-default-rtdb.europe-west1.firebasedatabase.app";
 
@@ -17,7 +19,10 @@ export async function storeExpense(expenseData) {
 }
 
 export async function getExpenses(userId) {
-  const response = await axios.get(BASE_URL + "/expenses.json")
+  const authCtx = useContext(AuthContext)
+  const token = authCtx.token
+  console.log('token', token)
+  const response = await axios.get(BASE_URL + "/expenses.json" )
   const expenses = [];
   for (const key in response.data) {
     if (response.data[key].userId === userId) {
