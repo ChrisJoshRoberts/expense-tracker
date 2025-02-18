@@ -38,6 +38,7 @@ const RecentExpenses = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ExpensesOutput 
+        screen='recentExpenses'
         buttonTitle='Add Expense'
         expenses={recentExpenses} 
         expensesPeriod={'Total Spent: Last 7 Days'} 

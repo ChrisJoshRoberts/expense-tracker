@@ -12,6 +12,7 @@ const AllExpenses = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ExpensesOutput 
+        screen='allExpenses'
         buttonTitle={'Add Expense'}
         expenses={expensesCtx.expenses} 
         expensesPeriod={'All Expenses'} 

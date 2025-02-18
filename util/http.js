@@ -19,9 +19,7 @@ export async function storeExpense(expenseData) {
 }
 
 export async function getExpenses(userId) {
-  const authCtx = useContext(AuthContext)
-  const token = authCtx.token
-  console.log('token', token)
+
   const response = await axios.get(BASE_URL + "/expenses.json" )
   const expenses = [];
   for (const key in response.data) {

@@ -3,12 +3,16 @@ import React, { useContext } from 'react'
 import IconButtonAdd from './UI/IconButtonAdd'
 import { BudgetContext } from '../../store/budget-context'
 
-const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
+const ExpensesSummary = ({ period, expenses, buttonTitle, screen}) => {
   const budgetCtx = useContext(BudgetContext)
   const budgets = budgetCtx.budgets
   const expensesTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0)
 
+  console.log(expensesTotal)
+
   const totalAmount = budgets.length > 0 ? budgets[0].amount - expensesTotal : 0
+
+  console.log(totalAmount, 'TOTAL AMOUT')
   
   return (
   <View style={styles.summaryContainer}>
@@ -25,7 +29,7 @@ const ExpensesSummary = ({ period, expenses, buttonTitle}) => {
     <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'flex-end'}}>
       <View>
         <Text style={styles.periodTitle}>{period}</Text>
-        <Text style={styles.totalAmount}>R{totalAmount.toFixed(2)}</Text>
+        <Text style={styles.totalAmount}>R{screen === 'recentExpenses' || screen === 'allExpenses' ? expensesTotal.toFixed(2) :totalAmount.toFixed(2)}</Text>
       </View>
       {
         period !== 'Budget left' &&
