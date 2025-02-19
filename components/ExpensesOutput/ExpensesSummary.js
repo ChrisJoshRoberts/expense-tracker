@@ -8,11 +8,8 @@ const ExpensesSummary = ({ period, expenses, buttonTitle, screen}) => {
   const budgets = budgetCtx.budgets
   const expensesTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0)
 
-  console.log(expensesTotal)
+  const totalAmount = budgets.length > 0 ? budgets[0].amount - expensesTotal : 0;
 
-  const totalAmount = budgets.length > 0 ? budgets[0].amount - expensesTotal : 0
-
-  console.log(totalAmount, 'TOTAL AMOUT')
   
   return (
   <View style={styles.summaryContainer}>
