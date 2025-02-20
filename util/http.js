@@ -1,17 +1,9 @@
 import axios from "axios";
-import { getAuth } from "firebase/auth";
 
 const BASE_URL = "https://expense-tracker-f6499-default-rtdb.europe-west1.firebasedatabase.app";
 
-async function getAuthToken() {
-  const auth = getAuth();
-  const user = await auth.currentUser;
-  return user ? await user.getIdToken() : null;
-}
-
 export async function storeExpense(expenseData) {
   try {
-    const token = await getAuthToken();
     const response = await axios.post(
       `${BASE_URL}/expenses.json?auth=${token}`,
       expenseData
@@ -25,8 +17,7 @@ export async function storeExpense(expenseData) {
 }
 
 export async function getExpenses(userId) {
-  const token = await getAuthToken();
-  const response = await axios.get(`${BASE_URL}/expenses.json?auth=${token}`)
+  const response = await axios.get(`${BASE_URL}/expenses.json`)
   const expenses = [];
   for (const key in response.data) {
     if (response.data[key].userId === userId) {
@@ -46,22 +37,20 @@ export async function getExpenses(userId) {
 }
 
 export async function updateExpense(id, expenseData ) {
-  const token =  await getAuthToken();
-  return axios.put(`${BASE_URL}/expenses/${id}.json?auth=${token}`, expenseData);
+  return axios.put(`${BASE_URL}/expenses/${id}.json`, expenseData);
 }
 
 export async function deleteExpense(id) {
-  const token = await getAuthToken();
-  return axios.delete(`${BASE_URL}/expenses/${id}.json?auth=${token}`)
+  return axios.delete(`${BASE_URL}/expenses/${id}.json`)
 }
 
 // Budget functions
 
 export async function storeBudget(budgetData) {
   try {
-    const token = await getAuthToken();
+
     const response = await axios.post(
-      `${BASE_URL}/budgets.json?auth=${token}`,
+      `${BASE_URL}/budgets.json`,
       budgetData
     );
     const id = response.data.name;
@@ -73,8 +62,7 @@ export async function storeBudget(budgetData) {
 }
 
 export async function getBudget(userId) {
-  const token = await getAuthToken();
-  const response = await axios.get(`${BASE_URL}/budgets.json?auth=${token}`);
+  const response = await axios.get(`${BASE_URL}/budgets.json`);
   let budgets = [];
   for (const key in response.data) {
     if (response.data[key].userId === userId) {
@@ -89,11 +77,9 @@ export async function getBudget(userId) {
 }
 
 export async function updateBudget(id, budgetData) {
-  const token = await getAuthToken();
-  return axios.put(`${BASE_URL}/budgets/${id}.json?auth=${token}`, budgetData);
+  return axios.put(`${BASE_URL}/budgets/${id}.json`, budgetData);
 }
 
 export async function deleteBudget(id) {
-  const token = await getAuthToken();
-  return axios.delete(`${BASE_URL}/budgets/${id}.json?auth=${token}`);
+  return axios.delete(`${BASE_URL}/budgets/${id}.json`);
 }
